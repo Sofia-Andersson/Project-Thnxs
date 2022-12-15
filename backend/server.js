@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+import crypto from "crypto";
+import bcrypt from "bcrypt";
 
 // Necessary to use mongoose:
 // npm install
@@ -15,17 +17,33 @@ mongoose.Promise = Promise;
 const port = process.env.PORT || 8080;
 const app = express();
 
-const GratitudeThoughtSchema = new mongoose.Schema({
-  text: {
+const ThnxSchema = new mongoose.Schema({
+  text1: {
     type: String,
-    required: true,
-    unique: true
+    minLength: 3,
+    maxLength: 250,
+    required: true
+  },
+  text2: {
+    type: String,
+    maxLength: 250
+  },
+  text3: {
+    type: String,
+    maxLength: 250
   },
   ownerId: {
     type: String,
     required: true,
+  }, 
+  createdAt: {
+    type: Date, 
+    default: () => new Date()
   }
 })
+
+const Thnx = mongoose.model("Thnx", ThnxSchema);
+
 // Create UserSchema to define input needed from the user and how it should be handled.
 // Adjust according to Daniels instructions!
 const UserSchema = new mongoose.Schema({
@@ -34,13 +52,9 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  gratitudeThoughtsIds: {
+  thnxIds: {
     type: Array,
    },
-  ownerId: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,
@@ -49,6 +63,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString("hex"),
   },
+  phoneNumber: {
+   type: Number,
+  }
 });
 
 const User = mongoose.model("User", UserSchema);
@@ -59,8 +76,108 @@ app.use(express.json());
 
 // Start defining your routes here
 app.get("/", (req, res) => {
-  res.send("Hello Technigo!");
+  res.send("Connection is working");
 });
+
+app.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const salt = bcrypt.genSaltSync();
+    if (password.length < 8) {
+      res.status(400).json({
+        success: false, 
+        response: "Password must be minimum 8 characters"
+      });
+    } else {
+      const newUser = await new User({
+        username: username, 
+        password: bcrypt.hashSync(password, salt)
+      }).save();
+      res.status(201).json({
+        success: true, 
+        response: {
+          username: newUser.username, 
+          acessToken: newUser.accessToken, 
+          id: newUser._id
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false, 
+      response: error
+    });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({username});
+    if (user && bcrypt.compareSync(password, user.password)) {
+      res.status(200).json({
+        success: true,
+        response: {
+          username: user.username,
+          id: user._id,
+          accessToken: user.accessToken
+        }
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        response: "Credentials didn't match"
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      response: error
+    });
+  }
+});
+
+const authenticateUser = async (req, res, next) => {
+  const accessToken = req.header("Authorization");
+  try {
+    const user = await User.findOne({accessToken: accessToken});
+    if (user) {
+      next()
+    } else {
+      res.status(401).json({
+        response: "Please log in", 
+        success: false
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      response: error
+    });
+  }
+}; 
+
+app.get("/thnxs", authenticateUser);
+app.get("/thnxs", async (req, res) => {
+  const thnxs = await Thnx.find({});
+  res.status(200).json({success:true, response: thnxs})
+});
+
+app.post("/thnxs", authenticateUser);
+app.post("/thnxs", async (req, res) => {
+  const accessToken = req.header("Authorization");
+  const user = await User.findOne({accessToken: accessToken});
+  const { text1, text2, text3 } = req.body;
+  try {
+    const newThnx = await new Thnx({text1: text1, text2: text2, text3: text3, ownerId: user._id}).save();
+    res.status(201).json({success: true, response: newThnx});
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
