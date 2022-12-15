@@ -52,9 +52,9 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  thnxIds: {
-    type: Array,
-   },
+  // thnxIds: {
+  //   type: Array,
+  //  },
   password: {
     type: String,
     required: true,
@@ -81,7 +81,6 @@ app.get("/", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const salt = bcrypt.genSaltSync();
     if (password.length < 8) {
@@ -159,12 +158,31 @@ const authenticateUser = async (req, res, next) => {
   }
 }; 
 
+//returns all thnxs for a specific logged in user using accessToken to get user._id 
+// and then search for ownerId
 app.get("/thnxs", authenticateUser);
 app.get("/thnxs", async (req, res) => {
-  const thnxs = await Thnx.find({});
+  const accessToken = req.header("Authorization");
+  const user = await User.findOne({accessToken: accessToken});
+  const thnxs = await Thnx.find({ownerId: user._id});
   res.status(200).json({success:true, response: thnxs})
 });
 
+app.get("/thnxs/:date", authenticateUser);
+app.get("/thnxs/:date", async (req, res) => {
+  // const { date } = req.params.createdAt;
+  const dateregex = new RegExp (req.params.createdAt, "i")
+  const date = await Thnx.find({date: dateregex});
+  const accessToken = req.header("Authorization");
+  //const user = await User.findOne({accessToken: accessToken});
+  //const thnxs = await Thnx.find({ownerId: user._id});
+  //const dateThnxs = thnxs.find({date: createdAt})
+  res.status(200).json({success:true, response: date})
+});
+
+
+// for the inlogged user to post a thnx with 3 texts
+// updates ownerId with the user._id
 app.post("/thnxs", authenticateUser);
 app.post("/thnxs", async (req, res) => {
   const accessToken = req.header("Authorization");
