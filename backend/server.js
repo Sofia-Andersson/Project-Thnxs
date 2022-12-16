@@ -79,6 +79,8 @@ app.get("/", (req, res) => {
   res.send("Connection is working");
 });
 
+// Route for the user to register, bcrypt the password, and gives the user
+// a accessToken
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -110,6 +112,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
+// Route for the user to log in, checked the bcrypted password, and gives the user
+// a accessToken
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -138,6 +142,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// Authenticate the user by accessToken
 const authenticateUser = async (req, res, next) => {
   const accessToken = req.header("Authorization");
   try {
@@ -168,23 +173,20 @@ app.get("/thnxs", async (req, res) => {
   res.status(200).json({success:true, response: thnxs})
 });
 
-// const dateregex = new RegExp (req.params.createdAt, "i")
-// const date = await Thnx.find({date: dateregex});
-
+// return thnx from specific user and date
 app.get("/thnxs/:date", authenticateUser);
 app.get("/thnxs/:date", async (req, res) => {
+  // getting the date from url ex: 2022-12-16T08:14:52.343+00:00
   const date = req.params.date;
-  console.log(date)
+  // Validating the user by accesToken
   const accessToken = req.header("Authorization");
   const singleUser = await User.findOne({accessToken: accessToken});
-  const allThnxFromOneUser = await Thnx.find({ownerId: singleUser._id});
-  const thisDateThnx = allThnxFromOneUser.filter(x => x.createdAt === date);
-  console.log("thisDateThnx", thisDateThnx)
-
-  
-  //
-  //const dateThnxs = thnxs.find({date: createdAt})
-  res.status(200).json({success:true})
+  try {
+    const thnxFromSpecificDate = await Thnx.find({ownerId: singleUser._id, createdAt: date});
+    res.status(200).json({success:true, thnxFromSpecificDate})
+  } catch (error) {
+    res.status(400).json({success: false, response: error});
+  }
 });
 
 
