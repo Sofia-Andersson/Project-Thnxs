@@ -168,16 +168,23 @@ app.get("/thnxs", async (req, res) => {
   res.status(200).json({success:true, response: thnxs})
 });
 
+// const dateregex = new RegExp (req.params.createdAt, "i")
+// const date = await Thnx.find({date: dateregex});
+
 app.get("/thnxs/:date", authenticateUser);
 app.get("/thnxs/:date", async (req, res) => {
-  // const { date } = req.params.createdAt;
-  const dateregex = new RegExp (req.params.createdAt, "i")
-  const date = await Thnx.find({date: dateregex});
+  const date = req.params.date;
+  console.log(date)
   const accessToken = req.header("Authorization");
-  //const user = await User.findOne({accessToken: accessToken});
-  //const thnxs = await Thnx.find({ownerId: user._id});
+  const singleUser = await User.findOne({accessToken: accessToken});
+  const allThnxFromOneUser = await Thnx.find({ownerId: singleUser._id});
+  const thisDateThnx = allThnxFromOneUser.filter(x => x.createdAt === date);
+  console.log("thisDateThnx", thisDateThnx)
+
+  
+  //
   //const dateThnxs = thnxs.find({date: createdAt})
-  res.status(200).json({success:true, response: date})
+  res.status(200).json({success:true})
 });
 
 
