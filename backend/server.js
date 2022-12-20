@@ -182,7 +182,7 @@ app.get("/thnxs/:date", async (req, res) => {
   const queryDate = new Date(date);
   console.log("queryDate:", queryDate);
   let followingDate = new Date();
-  followingDate = queryDate.setDate(followingDate.getDate());
+  followingDate = queryDate.setDate(followingDate.getDate() + 1);
   console.log("followingDate:", followingDate);
   let poopDate = new Date(followingDate);
   console.log("new Date:", new Date(followingDate));
