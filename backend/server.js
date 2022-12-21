@@ -176,21 +176,23 @@ app.get("/thnxs", async (req, res) => {
 // return thnx from specific user and date
 app.get("/thnxs/:date", authenticateUser);
 app.get("/thnxs/:date", async (req, res) => {
-  // getting the date from url ex: 2022-12-16T08:14:52.343+00:00
+  // getting the date from url 
   const date = req.params.date;
   console.log("date:", date);
   const queryDate = new Date(date);
   console.log("queryDate:", queryDate);
-  let followingDate = new Date();
-  followingDate = queryDate.setDate(followingDate.getDate() + 1);
+  const followingDate = new Date(queryDate.setDate(queryDate.getDate() +1));
   console.log("followingDate:", followingDate);
-  let poopDate = new Date(followingDate);
-  console.log("new Date:", new Date(followingDate));
   // Validating the user by accesToken
   const accessToken = req.header("Authorization");
   const singleUser = await User.findOne({accessToken: accessToken});
   try {
-    const thnxFromSpecificDate = await Thnx.find({ownerId: singleUser._id, createdAt: {$gte: queryDate, $lt: poopDate}});
+    const thnxFromSpecificDate = await Thnx.find({
+      ownerId: singleUser._id,
+      createdAt: {
+        $gte: queryDate, $lt: followingDate
+      }
+    });
     res.status(200).json({success:true, thnxFromSpecificDate})
   } catch (error) {
     res.status(400).json({success: false, response: error});
