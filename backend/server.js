@@ -190,7 +190,8 @@ app.get("/thnxs/:date", async (req, res) => {
     const thnxFromSpecificDate = await Thnx.find({
       ownerId: singleUser._id,
       createdAt: {
-        $gte: queryDate, $lt: followingDate
+        $gte: (date),
+        $lt: (followingDate)
       }
     });
     res.status(200).json({success:true, thnxFromSpecificDate})
