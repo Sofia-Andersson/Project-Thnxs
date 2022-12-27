@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 
+import { AboutPage } from './AboutPage';
+import { Link } from "react-router-dom";
+
 export const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -17,6 +20,7 @@ export const LoginPage = () => {
   // if there is an accessToken the user will be directed to the inputPage. 
   useEffect(() => {
     if (accessToken) {
+      //localStorage.setItem('accessToken', accessToken);
       navigate('/input');
     }
   }, [accessToken, navigate]);
@@ -58,6 +62,7 @@ export const LoginPage = () => {
         }
       });
   };
+
   return (
     <>
       <h1>Please log in</h1>
@@ -78,6 +83,11 @@ export const LoginPage = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
+      <Link to="/about">
+        <button type="button">
+          What is this app?
+        </button>
+      </Link>
     </>
   )
 }

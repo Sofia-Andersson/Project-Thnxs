@@ -7,8 +7,9 @@ import { user } from './reducers/user';
 
 import { LoginPage } from './pages/LoginPage';
 import { InputPage } from './pages/InputPage';
-// import { CalendarViewPage } from './pages/CalendarViewPage'
-// import { NotFoundPage } from './pages/NotFoundPage'
+import { CalendarViewPage } from './pages/CalendarViewPage'
+import { NotFoundPage } from './pages/NotFoundPage';
+import { AboutPage } from './pages/AboutPage';
 
 const reducer = combineReducers({
   user: user.reducer
@@ -23,12 +24,11 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/input" element={<InputPage />} />
-          {/* <Route path="/calender" element={<CalendarViewPage />} />
-          <Route path="/*" element={<NotFoundPage />} /> */}
+          <Route path="/calendar" element={<CalendarViewPage />} />
+          <Route path="/*" element={<NotFoundPage />} /> 
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>
   )
 }
-
-// <Route path="/about" element={<About />} />
