@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 
+import { Button } from '../styledComponents/Button';
+
 export const CalendarViewPage = () => {
     const [thnxList, setThnxList] = useState ([]);
     const [loading, setLoading] = useState(false);
@@ -30,15 +32,13 @@ export const CalendarViewPage = () => {
     return (
         <>
             <p>här ska listan vara</p>
-            <button
+            <Button
                 type="button"
                 onClick={() => {
                 navigate('/');
                 localStorage.removeItem('accessToken');
                 }}
-            >
-                Logout
-            </button>
+            >Logout</Button>
             <Link to="/input">
             <button>Go to input-page
             </button>

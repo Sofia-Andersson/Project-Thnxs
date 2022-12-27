@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from '../styledComponents/Button'
 
 export const NotFoundPage = () => {
     return (
-      <Main>
-          <Title>404</Title>
-          <SubTitle>Sorry, this page can't be found</SubTitle>
+      <>
+          <h1>404. Sorry, this page can't be found</h1>
           <Link to="/">
             <Button>Go back to startpage</Button>
           </Link>
-      </Main>
+      </>
     );
   };

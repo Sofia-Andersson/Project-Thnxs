@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
 
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
@@ -11,12 +12,29 @@ import { Link } from "react-router-dom";
 export const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [switchMode, setSwitchMode] = useState("login");
+  const [isPanelActive, setIsPanelActive] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
+  const onToggleClick = () => {
+    setErrorMessage("");
+    setUsername("");
+    setPassword("");
+    setPasswordShown(false);
+    if (switchMode === "login") {
+      setSwitchMode("signup");
+      setIsPanelActive(true);
+    } else {
+      setSwitchMode("login");
+      setIsPanelActive(false);
+    }
+  };
+  
   // if there is an accessToken the user will be directed to the inputPage. 
   useEffect(() => {
     if (accessToken) {
@@ -39,7 +57,7 @@ export const LoginPage = () => {
       })
     };
 
-    fetch(API_URL('login'), options)
+   fetch(API_URL('login'), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -88,6 +106,12 @@ export const LoginPage = () => {
           What is this app?
         </button>
       </Link>
+      <div>
+      <h2>First time here?</h2>
+              /* <button type="button" onClick={onToggleClick} id="signup">
+              Create an account
+              </button>
+      </div>
     </>
   )
 }

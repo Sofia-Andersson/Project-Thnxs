@@ -3,6 +3,8 @@ import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 // import { user } from '../reducers/user';
 
+import { Button } from '../styledComponents/Button'
+
 // importera komponenterna
 
 export const InputPage = () => { 
@@ -77,11 +79,11 @@ export const InputPage = () => {
           <textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
           <textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
           <textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} />
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
           <Link to="/calendar">
-          <button>Go to calendarview</button>
+          <Button>Go to calendarview</Button>
           </Link>
-          <button
+          <Button
                 type="button"
                 onClick={() => {
                 navigate('/');
@@ -89,7 +91,7 @@ export const InputPage = () => {
                 }}
             >
               Logout
-            </button>
+            </Button>
         </div>
     </form>
  )
