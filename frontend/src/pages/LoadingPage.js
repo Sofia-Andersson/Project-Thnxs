@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import styled from 'styled-components'
-import LoadingDot from 'lotties/loading';
+import LoadingDots from 'lotties/loading';
 
 // npm i lottie-react done
 // Loading component rendered when isLoading=true
@@ -9,17 +9,17 @@ export const LoadingPage = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: LoadingDot,
+    animationData: LoadingDots,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
   };
 
-  // Lottie-animation from json-file showing jumping dots while loading
+  // Lottie-animation from json-file showing dots while loading
   return (
     <LoadingOuterWrapper>
       <LoadingPageWrapper>
-        <Lottie animationData={LoadingDot} options={defaultOptions} height={400} width={400} />
+        <Lottie animationData={LoadingDots} options={defaultOptions} height={400} width={400} />
       </LoadingPageWrapper>
     </LoadingOuterWrapper>
   );
