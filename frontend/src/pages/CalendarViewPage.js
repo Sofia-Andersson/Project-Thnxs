@@ -43,15 +43,27 @@ export const CalendarViewPage = () => {
         fetchThnx();
     }, []);
 
+    // Thnx-list is an object, we need to map an array. HOW?
+
+    console.log(thnxList)
     return (
+        
         <>
-            {isLoading && <LoadingPage />}
-            <p>här ska listan vara</p>
+            {/* {isLoading && <LoadingPage />} */}
+         
+            {/* {thnxList.map((singleThnx) => {
+                return (
+                    <div key={singleThnx._id}>
+                        <p>{singleThnx.text1}</p>
+                    </div>
+                )
+            })} */}
+
+
             <Button
                 type="button"
                 onClick={() => {
                 navigate('/');
-                localStorage.removeItem('accessToken');
                 }}
             >Logout</Button>
             <Link to="/input">

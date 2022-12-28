@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
-import { user } from '../reducers/user';
+// import { user } from '../reducers/user';
 
 import { Button } from '../styledComponents/Button'
 
 // importera komponenterna
-
 export const InputPage = () => { 
   const [newThnx1, setNewThnx1] = useState('');
-  // const [newThnx2, setNewThnx2] = useState('');
-  // const [newThnx3, setNewThnx3] = useState('');
-  // const accessToken = useState(localStorage.getItem('accessToken'));
+  const [newThnx2, setNewThnx2] = useState('');
+  const [newThnx3, setNewThnx3] = useState('');
   const accessToken = useSelector((store) => store.user.accessToken);
   // const textOne = useSelector((store) => store.input.textOne);
   // console.log(textOne)
@@ -21,16 +19,15 @@ export const InputPage = () => {
 
   const onNewThnxChange1 = (event) => {
     setNewThnx1(event.target.value);
-    console.log(newThnx1)
   }
 
-  // const onNewThnxChange2 = (event) => {
-  //   setNewThnx2(event.target.value);
-  // }
+  const onNewThnxChange2 = (event) => {
+    setNewThnx2(event.target.value);
+  }
 
-  // const onNewThnxChange3 = (event) => {
-  //   setNewThnx3(event.target.value);
-  // }
+  const onNewThnxChange3 = (event) => {
+    setNewThnx3(event.target.value);
+  }
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -42,7 +39,9 @@ export const InputPage = () => {
         'Authorization': accessToken
       },
       body: JSON.stringify({
-        text1: newThnx1
+        text1: newThnx1,
+        text2: newThnx2,
+        text3: newThnx3
       })
     };
 
@@ -63,20 +62,27 @@ export const InputPage = () => {
       //   }
       // })
       .catch((error) => console.error(error))
-      .finally(() => setNewThnx1(''));
+      .finally(() => setNewThnx1(''), setNewThnx2(''), setNewThnx3(''));
 }
 
-// if (!accessToken) {
-//  return <h1>You need to log in</h1>
-// }; 
+if (!accessToken) {
+ return (
+    <>
+      <h1>You need to log in</h1>
+      <Link to="/">
+      <button>Go to Login-page
+      </button>
+      </Link>
+    </>
+    )}; 
 
  return (
     <form onSubmit= {onFormSubmit}>
         <div>
           <p>TESTAR INPUT PAGE</p>
           <textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
-          {/* <textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
-          <textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} /> */}
+          <textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
+          <textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} />
           <Button type="submit">Submit</Button>
           <Link to="/calendar">
           <Button>Go to calendarview</Button>
