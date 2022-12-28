@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import styled from 'styled-components'
-import LoadingDots from 'lotties/loading';
+import LoadingDots from '../lotties/loading.json';
 
 // npm i lottie-react done
 // Loading component rendered when isLoading=true
