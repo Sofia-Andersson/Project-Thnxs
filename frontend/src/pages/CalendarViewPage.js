@@ -33,7 +33,7 @@ export const CalendarViewPage = () => {
         dispatch(user.actions.setLoading(true));
         fetch(API_URL('thnxs'), options)
             .then((res) => res.json())
-            .then((data) => setThnxList(data))
+            .then((data) => setThnxList(data.response))  
             .catch((error) => console.error(error))
             .finally(() => dispatch(user.actions.setLoading(false)));
     }
@@ -45,13 +45,25 @@ export const CalendarViewPage = () => {
 
     // Thnx-list is an object, we need to map an array. HOW?
 
-    console.log(thnxList.response)
+    // console.log(thnxList.response)
+    // console.log(thnxList)
+
+    // const abba = Date.now();
+    // const today = new Date(abba)
+    // console.log(today)
+
     return (
         
         <>
             {isLoading && <LoadingPage />}
+
+            {/* <div>todays date is: {today}</div> */}
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
          
-            {thnxList.response.map((singleThnx) => {
+            {thnxList.map((singleThnx) => {
                 return (
                     <div key={singleThnx._id}>
                         <p><b>{singleThnx.createdAt}</b></p>

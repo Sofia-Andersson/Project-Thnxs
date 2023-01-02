@@ -183,7 +183,7 @@ app.get('/thnxs/:date', async (req, res) => {
   console.log('date:', date);
   const queryDate = new Date(date);
   console.log('queryDate:', queryDate);
-  const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1));
+  const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1))
   console.log('followingDate:', followingDate);
   // Validating the user by accesToken
   const accessToken = req.header('Authorization');
