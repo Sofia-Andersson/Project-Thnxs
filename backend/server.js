@@ -165,6 +165,8 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+
+
 // returns all thnxs for a specific logged in user using accessToken to get user._id
 // and then search for ownerId
 app.get('/thnxs', authenticateUser);
@@ -202,9 +204,31 @@ app.get('/thnxs/:date', async (req, res) => {
   }
 });
 
+const oneThnxPerDayLimit = async (req, res, next) => {
+  const today = new Date().setUTCHours(0,0,0,0);
+  console.log('today2:', today)
+  const queryDate = new Date(today)
+  console.log('queryDate2:', queryDate);
+  const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1))
+  console.log('followingDate2:', followingDate);
+  try {
+    if (!Thnx.find({createdAt: {
+      $gte: (queryDate),
+      $lt: (followingDate)
+    }})) {
+      next()
+    } else {
+      res.status(400).json({ success: false, response: 'You have already submitted the thnxs for today' });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false, response: error });
+  } 
+} 
+
 // for the inlogged user to post a thnx with 3 texts
 // updates ownerId with the user._id
 app.post('/thnxs', authenticateUser);
+app.post('/thnxs', oneThnxPerDayLimit);
 app.post('/thnxs', async (req, res) => {
   const accessToken = req.header('Authorization');
   const user = await User.findOne({ accessToken });
