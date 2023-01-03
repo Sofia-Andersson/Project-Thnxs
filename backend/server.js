@@ -207,27 +207,31 @@ app.get('/thnxs/:date', async (req, res) => {
 });
 
 const oneThnxPerDayLimit = async (req, res, next) => {
+  // todays date last midnight
   const today = new Date().setUTCHours(0,0,0,0);
-  console.log('today2:', today)
-  const queryDate = new Date(today)
+  console.log('today2:', today);
+  const queryDate = new Date(today).getTime();
   console.log('queryDate2:', queryDate);
-  const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1))
+
+  // coming midnight
+  const followingDate = new Date(new Date(queryDate).setDate(new Date(queryDate).getDate() + 1))
   console.log('followingDate2:', followingDate);
 
-  // const accessToken = req.header('Authorization');
-  // const user = await User.findOne({ accessToken });
-  // const thnxs = await Thnx.find({ ownerId: user._id });
+  const accessToken = req.header('Authorization');
+
   try {
-    const testDate = await (Thnx.find({createdAt: {
-      $gte: (queryDate),
-      $lt: (followingDate)
+    // find one users thnxs by accesToken
+    // const user = await User.findOne({ accessToken });
+    // const thnxs = await Thnx.find({ ownerId: user._id });
+
+    // search the users thnxs 
+    const testDate = await (Thnx.exists({createdAt: {
+      $gte: queryDate,
+      $lt: followingDate
     }}))
     console.log("testDate:", testDate)
-    if (Thnx.find({createdAt: {
-      $gte: (queryDate),
-      $lt: (followingDate)
-    }})) {
 
+    if (testDate) {
       res.status(400).json({ success: false, response: 'You have already submitted the thnxs for today' });
     } else {
       next()
