@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
+import { MainWrapper } from '../styledComponents/MainWrapper';
 // import { user } from '../reducers/user';
 
 import { Button } from '../styledComponents/Button'
@@ -81,7 +82,7 @@ if (!accessToken) {
 
  return (
     <form onSubmit= {onFormSubmit}>
-        <div className="main">
+        <InputWrapper>
           <h1>WHAT ARE YOU GREATFUL FOR TODAY?</h1>
           <TextAreaContainer>
             <Textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
@@ -101,7 +102,7 @@ if (!accessToken) {
             >
               Logout
               </Button>
-        </div>
+        </InputWrapper>
     </form>
  )
 };
@@ -120,4 +121,8 @@ const Textarea = styled.textarea`
   border-radius: 5px;
   padding: 5px;
   outline-color: var(--color-lightBrown);
+`;
+
+const InputWrapper = styled(MainWrapper)`
+	height: 800px;
 `;

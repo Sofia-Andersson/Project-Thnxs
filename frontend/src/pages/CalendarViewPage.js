@@ -6,6 +6,7 @@ import { LoadingPage } from '../pages/LoadingPage';
 import { Button } from '../styledComponents/Button';
 import { user } from '../reducers/user';
 import styled from 'styled-components';
+import { MainWrapper } from '../styledComponents/MainWrapper';
 
 export const CalendarViewPage = () => {
     const [thnxList, setThnxList] = useState ([]);
@@ -55,7 +56,7 @@ export const CalendarViewPage = () => {
 
     return (
         
-        <div className="main">
+        <MainWrapper>
             <OuterThnxWrapper>
             {isLoading && <LoadingPage />}
 
@@ -91,7 +92,7 @@ export const CalendarViewPage = () => {
             </Button>
             </Link>
             </OuterThnxWrapper>
-        </div>
+        </MainWrapper>
     )
 }
 

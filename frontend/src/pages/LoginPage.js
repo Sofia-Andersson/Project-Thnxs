@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
-
+import { MainWrapper } from '../styledComponents/MainWrapper';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 
@@ -77,7 +77,7 @@ export const LoginPage = () => {
 
 // Test log in section
 return (
-	<div className="main">  	
+	<MainWrapper>  	
 		<input type="checkbox" id="chk" aria-hidden="true" />
 			<div class="login">
 				<form onSubmit={onFormSubmit}>
@@ -117,7 +117,7 @@ return (
 					<Button> Register </Button>
 				</form>
       </div>
-	</div>
+	</MainWrapper>
   )
 }
 
