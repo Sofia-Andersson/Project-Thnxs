@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoadingPage } from '../pages/LoadingPage';
 import { Button } from '../styledComponents/Button';
 import { user } from '../reducers/user';
+import styled from 'styled-components';
 
 export const CalendarViewPage = () => {
     const [thnxList, setThnxList] = useState ([]);
@@ -55,6 +56,7 @@ export const CalendarViewPage = () => {
     return (
         
         <div className="main">
+            <OuterThnxWrapper>
             {isLoading && <LoadingPage />}
 
             {/* <div>todays date is: {today}</div> */}
@@ -65,14 +67,15 @@ export const CalendarViewPage = () => {
          
             {thnxList.map((singleThnx) => {
                 return (
-                    
+                    <ThnxWrapper>
                     <div key={singleThnx._id}>
-                        <p><b>{singleThnx.createdAt}</b></p>
-                        <p>1: {singleThnx.text1}</p>
-                        <p>2: {singleThnx.text2}</p>
-                        <p>3: {singleThnx.text3}</p>
+                        <ThnxDate>{singleThnx.createdAt}</ThnxDate>
+                        <ThnxText>1: {singleThnx.text1}</ThnxText>
+                        <ThnxText>2: {singleThnx.text2}</ThnxText>
+                        <ThnxText>3: {singleThnx.text3}</ThnxText>
                     </div>
-                    
+                    </ThnxWrapper>
+                
                 )
             })}
 
@@ -87,6 +90,31 @@ export const CalendarViewPage = () => {
             <Button>Go to input-page
             </Button>
             </Link>
+            </OuterThnxWrapper>
         </div>
     )
 }
+
+const ThnxWrapper = styled.div`
+    background-color: red;
+    heigth: 40%;
+    width: 70%;
+    margin: 5px 10px;
+  
+`; 
+
+const OuterThnxWrapper = styled.div`
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    
+`;
+
+const ThnxText = styled.p `
+    margin: 0px;
+    font-size: 16px;
+`;
+
+const ThnxDate = styled(ThnxText)`
+
+`;
