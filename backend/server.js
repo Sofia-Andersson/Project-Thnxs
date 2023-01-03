@@ -213,19 +213,20 @@ const oneThnxPerDayLimit = async (req, res, next) => {
   const queryDate = new Date(today).getTime();
   console.log('queryDate2:', queryDate);
 
-  // coming midnight
-  const followingDate = new Date(new Date(queryDate).setDate(new Date(queryDate).getDate() + 1))
+  // coming midnight in millisecond
+  const followingDate = new Date(queryDate).setDate(new Date(queryDate).getDate() + 1);
   console.log('followingDate2:', followingDate);
 
   const accessToken = req.header('Authorization');
 
   try {
-    // find one users thnxs by accesToken
-    // const user = await User.findOne({ accessToken });
-    // const thnxs = await Thnx.find({ ownerId: user._id });
+    //find one users thnxs by accesToken
+    const user = await User.findOne({ accessToken });
 
     // search the users thnxs 
-    const testDate = await (Thnx.exists({createdAt: {
+    const testDate = await (Thnx.exists({
+      ownerId: user._id, 
+      createdAt: {
       $gte: queryDate,
       $lt: followingDate
     }}))
