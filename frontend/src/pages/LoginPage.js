@@ -14,7 +14,6 @@ export const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [modeChange, setModeChange] = useState('login');
-  const [inUse, setInUse] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -28,10 +27,8 @@ export const LoginPage = () => {
     setPassword('');
     if (modeChange === 'login') {
       setModeChange('register');
-      setInUse(true)
     } else {
       setModeChange('login');
-      setInUse(false);
     }
   };
   
@@ -44,7 +41,6 @@ export const LoginPage = () => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-
     const options = {
       method: 'POST',
       headers: {
@@ -78,211 +74,55 @@ export const LoginPage = () => {
         }
       });
   };
-/*
-  return (
-    <OuterWrapper>
-      <div className={`container ${inUse ? "right-panel-active" : ""}`}>
-        <div className="register-container register-1-container">
-          <FormContainer onFormSubmit={onFormSubmit}>
-            <MobileContainer>
-              <FormPMobile>Log in</FormPMobile>
-              <ButtonMobile
-                type="button"
-                onClick={onToggleClick}
-                id="login"
-                Mode
-              >
-                Log in
-              </ButtonMobile>
-            </MobileContainer>
 
-            <h1>Create account</h1>
+// Test log in section
+return (
+	<div className="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true" />
+			<div class="signup">
+				<form onSubmit={onFormSubmit}>
+					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Login</label>
+					<input 
+            type="text" 
+            name="txt" 
+            placeholder="User name" 
+            required="" 
+            value={username}
+            onChange={(event) => setUsername(event.target.value)} />
+					<input 
+            type="password" 
+            name="pswd" 
+            placeholder="Password" 
+            required="" value={password}
+            onChange={(event) => setPassword(event.target.value)} />
+					<button>Login</button>
+				</form>
+			</div>
 
-            <div className="input-container">
-              <label htmlFor="username">Username
-                <input
-                  className='login'
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)} 
-                  required
-                />
-              </label>
-            </div>
-
-            <div className="input-container">
-                <label htmlFor="password">Password
-                  <input
-                    className="login"
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)} 
-                    required
-                  />
-                </label>
-              </div>
-              
-              <Button type="submit" Mode>Submit</Button>
-
-            <ErrorMessageContainer>
-              <ErrorMessage>{errorMessage}</ErrorMessage>
-            </ErrorMessageContainer>
-          </FormContainer>
-          
-        </div>
-
-        <div className='register-container login-container'>
-        <FormContainer onFormSubmit={onFormSubmit}>
-          <MobileContainer>
-            <FormPMobile>Creat a new account</FormPMobile>
-            <ButtonMobile
-              type="button"
-              onClick={onToggleClick}
-              id="register"
-              Mode
-            >
-              Register
-            </ButtonMobile>
-          </MobileContainer>
-          <h1>Login</h1>
-          <div className="input-container">
-            <label htmlFor="username">Username
-              <input
-                className="input"
-                type="text"
-                id="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)} 
-                required
-              />
-            </label>
-            <label htmlFor="password">Password
-              <input
-                className="login"
-                type="password"
-                id="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)} 
-                required
-              />
-            </label>
-          </div>
-          <Button type="submit" Mode>
-            Login
-          </Button>
-          <ErrorMessageContainer>
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-          </ErrorMessageContainer>
-        </FormContainer>
+			<div className="login">
+				<form onSubmit={onFormSubmit}>
+					<label for="chk" aria-hidden="true" onClick={onToggleClick}> Register </label>
+          <input 
+            type="text" 
+            name="txt" 
+            placeholder="User name" 
+            required="" value={username}
+            onChange={(event) => setUsername(event.target.value)} />
+					<input 
+            type="password" 
+            name="pswd" 
+            placeholder="Password" 
+            required="" value={password}
+            onChange={(event) => setPassword(event.target.value)} />
+					<button> Register </button>
+				</form>
       </div>
-
-      <div className="overlay-container">
-          <div className="overlay">
-            <div className="panel panel-left">
-              <h2>Already a user?</h2>
-              <InfoP>Please go to login page</InfoP>
-              <Button type="button" onClick={onToggleClick} id="login">
-                Login
-              </Button>
-            </div>
-            <div className="panel panel-right">
-              <h2>Create a new account?</h2>
-              <InfoP>Click signup to create one</InfoP>
-              <Button type="button" onClick={onToggleClick} id="register">
-                signup
-              </Button>
-            </div>
-          </div>
-        </div>
-    </div>
-  </OuterWrapper>
-
-
-  );
-};
-
-export const OuterWrapper = styled.section`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-height: 100vh;
-margin: -20px 0 50px;
-`;
-
-export const FormContainer = styled.form`
-background-color: #ffffff;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-padding: 0 50px;
-height: 100%;
-text-align: center;
-`;
-
-export const MobileContainer = styled.div`
-display: flex;
-width: 100%;
-justify-content: center;
-align-items: center;
-margin: 20px;
-
-@media (min-width: 769px) {
-  display: none;
-} 
-`;
-
-export const FormPMobile = styled.p `
-color: #a7a7a7;
-font-size: 14px;
-`;
-
-export const InfoP = styled.p `
-color: #fff;
-  margin: 16px 0;
-`;
-
-export const ButtonMobile = styled.button`
-  display: block;
-  cursor: pointer;
-  color: #4b5b7c;
-  font-size: 12px;
-  border: none;
-  background-color: #fff;
-  letter-spacing: 1px;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-
-@media (min-width: 769px) {
-    display: none }
-`;
-
-export const ErrorMessageContainer = styled.div`
-
-position: absolute;
-bottom: 30px;
-padding: 0;
-
-@media (min-width: 769px) {
-  bottom: 40px;
-padding: 20px;
+	</div>
+  )
 }
-`;
-
-export const ErrorMessage = styled.p`
-color: red;
-align-self: center;
-`; */
-
-
 
 // Former log in section:
-
-return (
+/* return (
   <>
 <h1>Please log in</h1>
       <form onSubmit={onFormSubmit}>
@@ -297,11 +137,11 @@ return (
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)} />
+            value={username}
+            onChange={(event) => setUsername(event.target.value)} /> />
         </label>
         <Button type="submit">Submit</Button>
       </form>
    </>
   );
-};
+}; */

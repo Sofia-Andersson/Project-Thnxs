@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
+import styled from 'styled-components';
 // import { user } from '../reducers/user';
 
 import { Button } from '../styledComponents/Button'
@@ -80,11 +81,13 @@ if (!accessToken) {
 
  return (
     <form onSubmit= {onFormSubmit}>
-        <div>
-          <p>TESTAR INPUT PAGE</p>
-          <textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
-          <textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
-          <textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} />
+        <div className="main">
+          <h1>WHAT ARE YOU GREATFUL FOR TODAY?</h1>
+          <TextAreaContainer>
+            <Textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
+            <Textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
+            <Textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} />
+          </TextAreaContainer>
           <Button type="submit">Submit</Button>
           <Link to="/calendar">
           <Button>Go to calendarview</Button>
@@ -102,3 +105,19 @@ if (!accessToken) {
     </form>
  )
 };
+
+const TextAreaContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px;
+`; 
+
+const Textarea = styled.textarea`
+  margin: 10px 0;
+  resize: none;
+  font-family: 'Akshar', sans-serif;
+  height: 3rem; 
+  border-radius: 5px;
+  padding: 5px;
+  outline-color: var(--color-lightBrown);
+`;
