@@ -5,13 +5,13 @@
   }
   
   body {
-    background-image: url("./assets/background.jpg");
+    /* background-image: url("./assets/background.jpg"); */
     width: 100vw;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   
   h1 {

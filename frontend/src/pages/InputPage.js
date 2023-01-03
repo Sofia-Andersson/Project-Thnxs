@@ -63,6 +63,8 @@ export const InputPage = () => {
       // })
       .catch((error) => console.error(error))
       .finally(() => setNewThnx1(''), setNewThnx2(''), setNewThnx3(''));
+
+      alert("Great job!");
 }
 
 if (!accessToken) {
@@ -70,8 +72,8 @@ if (!accessToken) {
     <>
       <h1>You need to log in</h1>
       <Link to="/">
-      <button>Go to Login-page
-      </button>
+      <Button>Go to Login-page
+      </Button>
       </Link>
     </>
     )}; 
@@ -91,8 +93,7 @@ if (!accessToken) {
           <Button
                 type="button"
                 onClick={() => {
-                navigate('/');
-                localStorage.removeItem('accessToken');
+                  location.reload()
                 }}
             >
               Logout

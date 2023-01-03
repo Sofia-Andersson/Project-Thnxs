@@ -300,7 +300,7 @@ return (
             value={password}
             onChange={(event) => setPassword(event.target.value)} />
         </label>
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
    </>
   );

@@ -78,12 +78,12 @@ export const CalendarViewPage = () => {
             <Button
                 type="button"
                 onClick={() => {
-                navigate('/');
+                location.reload()
                 }}
             >Logout</Button>
             <Link to="/input">
-            <button>Go to input-page
-            </button>
+            <Button>Go to input-page
+            </Button>
             </Link>
         </>
     )
