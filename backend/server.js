@@ -165,16 +165,18 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-
-
 // returns all thnxs for a specific logged in user using accessToken to get user._id
 // and then search for ownerId
 app.get('/thnxs', authenticateUser);
 app.get('/thnxs', async (req, res) => {
   const accessToken = req.header('Authorization');
-  const user = await User.findOne({ accessToken });
-  const thnxs = await Thnx.find({ ownerId: user._id });
-  res.status(200).json({ success: true, response: thnxs })
+  try {
+    const user = await User.findOne({ accessToken });
+    const thnxs = await Thnx.find({ ownerId: user._id });
+    res.status(200).json({ success: true, response: thnxs })
+  } catch (error) {
+    res.status(400).json({ success: false, response: error });
+  }
 });
 
 // return thnx from specific user and date
@@ -211,14 +213,24 @@ const oneThnxPerDayLimit = async (req, res, next) => {
   console.log('queryDate2:', queryDate);
   const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1))
   console.log('followingDate2:', followingDate);
+
+  // const accessToken = req.header('Authorization');
+  // const user = await User.findOne({ accessToken });
+  // const thnxs = await Thnx.find({ ownerId: user._id });
   try {
-    if (!Thnx.find({createdAt: {
+    const testDate = await (Thnx.find({createdAt: {
+      $gte: (queryDate),
+      $lt: (followingDate)
+    }}))
+    console.log("testDate:", testDate)
+    if (Thnx.find({createdAt: {
       $gte: (queryDate),
       $lt: (followingDate)
     }})) {
-      next()
-    } else {
+
       res.status(400).json({ success: false, response: 'You have already submitted the thnxs for today' });
+    } else {
+      next()
     }
   } catch (error) {
     res.status(400).json({ success: false, response: error });

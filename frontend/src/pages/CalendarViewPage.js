@@ -43,15 +43,6 @@ export const CalendarViewPage = () => {
         fetchThnx();
     }, []);
 
-    // Thnx-list is an object, we need to map an array. HOW?
-
-    // console.log(thnxList.response)
-    // console.log(thnxList)
-
-    // const abba = Date.now();
-    // const today = new Date(abba)
-    // console.log(today)
-
     return (
         
         <>
