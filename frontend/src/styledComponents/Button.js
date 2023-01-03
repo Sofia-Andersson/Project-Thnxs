@@ -2,15 +2,24 @@ import React from 'react'
 import styled from 'styled-components/macro';
 
 export const Button = styled.button `
-cursor: pointer;
-  background-color: ${(props) => (props.Mode ? "rgb(126,100,63)" : "transparent")};
-  color: black;
-  border: 3px solid ${(props) => (props.Mode ? "rgb(126,100,63)" : "#fff")};
-  font-size: 12px;
-  letter-spacing: 1px;
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: var(--color-ligthBlack);
+  font-size: 1em;
   font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 20px;
-  border: 2px dotted black;
-  padding: 12px 20px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .2s ease-in;
+  cursor: pointer;
+  font-family: 'Akshar', sans-serif;
+  
+  &:hover { background-color: var(--color-black) }
+ 
 `;

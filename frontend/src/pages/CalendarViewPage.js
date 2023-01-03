@@ -54,7 +54,7 @@ export const CalendarViewPage = () => {
 
     return (
         
-        <>
+        <div className="main">
             {isLoading && <LoadingPage />}
 
             {/* <div>todays date is: {today}</div> */}
@@ -65,12 +65,14 @@ export const CalendarViewPage = () => {
          
             {thnxList.map((singleThnx) => {
                 return (
+                    
                     <div key={singleThnx._id}>
                         <p><b>{singleThnx.createdAt}</b></p>
                         <p>1: {singleThnx.text1}</p>
                         <p>2: {singleThnx.text2}</p>
                         <p>3: {singleThnx.text3}</p>
                     </div>
+                    
                 )
             })}
 
@@ -85,6 +87,6 @@ export const CalendarViewPage = () => {
             <Button>Go to input-page
             </Button>
             </Link>
-        </>
+        </div>
     )
 }

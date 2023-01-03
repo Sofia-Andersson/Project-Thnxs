@@ -85,10 +85,10 @@ if (!accessToken) {
           <h1>WHAT ARE YOU GREATFUL FOR TODAY?</h1>
           <TextAreaContainer>
             <Textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
-            <Textarea value={newThnx2} placeholder= "I'm grateful for..." onChange={onNewThnxChange2} />
-            <Textarea value={newThnx3} placeholder= "I'm grateful for..." onChange={onNewThnxChange3} />
+            <Textarea value={newThnx2} placeholder= "I'm also grateful for..." onChange={onNewThnxChange2} />
+            <Textarea value={newThnx3} placeholder= "And I'm grateful for..." onChange={onNewThnxChange3} />
           </TextAreaContainer>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">SUBMIT</Button>
           <Link to="/calendar">
           <Button>Go to calendarview</Button>
           </Link>

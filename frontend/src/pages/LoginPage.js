@@ -79,9 +79,9 @@ export const LoginPage = () => {
 return (
 	<div className="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true" />
-			<div class="signup">
+			<div class="login">
 				<form onSubmit={onFormSubmit}>
-					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Login</label>
+					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Login </label>
 					<input 
             type="text" 
             name="txt" 
@@ -95,11 +95,11 @@ return (
             placeholder="Password" 
             required="" value={password}
             onChange={(event) => setPassword(event.target.value)} />
-					<button>Login</button>
+					<Button>Login</Button>
 				</form>
 			</div>
 
-			<div className="login">
+			<div className="register">
 				<form onSubmit={onFormSubmit}>
 					<label for="chk" aria-hidden="true" onClick={onToggleClick}> Register </label>
           <input 
@@ -114,7 +114,7 @@ return (
             placeholder="Password" 
             required="" value={password}
             onChange={(event) => setPassword(event.target.value)} />
-					<button> Register </button>
+					<Button> Register </Button>
 				</form>
       </div>
 	</div>

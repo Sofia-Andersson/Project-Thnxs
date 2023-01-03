@@ -195,7 +195,7 @@ app.get('/thnxs/:date', async (req, res) => {
         $gte: (date),
         $lt: (followingDate)
       }
-    });
+    }.limit(2));
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
