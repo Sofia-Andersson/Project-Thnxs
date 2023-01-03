@@ -87,6 +87,7 @@ if (!accessToken) {
           <Link to="/calendar">
           <Button>Go to calendarview</Button>
           </Link>
+
           <Button
                 type="button"
                 onClick={() => {
@@ -95,7 +96,7 @@ if (!accessToken) {
                 }}
             >
               Logout
-            </Button>
+              </Button>
         </div>
     </form>
  )

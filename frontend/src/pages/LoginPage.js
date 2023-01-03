@@ -78,7 +78,7 @@ export const LoginPage = () => {
         }
       });
   };
-
+/*
   return (
     <OuterWrapper>
       <div className={`container ${inUse ? "right-panel-active" : ""}`}>
@@ -98,7 +98,7 @@ export const LoginPage = () => {
 
             <h1>Create account</h1>
 
-            <div className='input-container'>
+            <div className="input-container">
               <label htmlFor="username">Username
                 <input
                   className='login'
@@ -111,7 +111,7 @@ export const LoginPage = () => {
               </label>
             </div>
 
-            <div className='input-container'>
+            <div className="input-container">
                 <label htmlFor="password">Password
                   <input
                     className="login"
@@ -276,10 +276,14 @@ padding: 20px;
 export const ErrorMessage = styled.p`
 color: red;
 align-self: center;
-`;
+`; */
 
 
-{/* Former log in section:
+
+// Former log in section:
+
+return (
+  <>
 <h1>Please log in</h1>
       <form onSubmit={onFormSubmit}>
         <label htmlFor="username">Username
@@ -297,4 +301,7 @@ align-self: center;
             onChange={(event) => setPassword(event.target.value)} />
         </label>
         <button type="submit">Submit</button>
-      </form> */}
+      </form>
+   </>
+  );
+};
