@@ -172,7 +172,7 @@ app.get('/thnxs', async (req, res) => {
   const accessToken = req.header('Authorization');
   try {
     const user = await User.findOne({ accessToken });
-    const thnxs = await Thnx.find({ ownerId: user._id });
+    const thnxs = await Thnx.find({ ownerId: user._id }).limit(2);
     res.status(200).json({ success: true, response: thnxs })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
@@ -199,7 +199,7 @@ app.get('/thnxs/:date', async (req, res) => {
         $gte: (date),
         $lt: (followingDate)
       }
-    }.limit(2));
+    });
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
