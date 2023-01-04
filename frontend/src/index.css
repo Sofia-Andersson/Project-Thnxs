@@ -20,8 +20,9 @@ body{
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Akshar', sans-serif;
-  background-image: url("./assets/background.jpg");
-  background-size: cover;
+    background-image: url("./assets/background.jpg");
+    background-size: cover;
+    overflow: hidden;
 }
 
 .main{
