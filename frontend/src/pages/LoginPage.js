@@ -77,7 +77,23 @@ export const LoginPage = () => {
 
 // Test log in section
 return (
-	<MainWrapper>  	
+	<MainWrapper>
+    <nav role='navigation'>
+		<div id="menuToggle">
+			<input type="checkbox" />
+			<span></span>
+			<span></span>
+			<span></span>
+			<ul id="menu">
+          <Link to="/calendar">
+					<li>How to</li>
+          </Link>
+          <Link to="/about">
+					<li>About</li>
+          </Link>
+			</ul>
+		</div>
+	</nav>  	
 		<input type="checkbox" id="chk" aria-hidden="true" />
 			<div class="login">
 				<form onSubmit={onFormSubmit}>

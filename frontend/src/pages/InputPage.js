@@ -72,7 +72,7 @@ export const InputPage = () => {
 if (!accessToken) {
  return (
     <>
-      <h1>You need to log in</h1>
+      <h1>You are logged out</h1>
       <Link to="/">
       <Button>Go to Login-page
       </Button>
@@ -81,29 +81,39 @@ if (!accessToken) {
     )}; 
 
  return (
-    <form onSubmit= {onFormSubmit}>
-        <InputWrapper>
-          <h1>WHAT ARE YOU GREATFUL FOR TODAY?</h1>
-          <TextAreaContainer>
-            <Textarea value={newThnx1} placeholder= "I'm grateful for..." onChange={onNewThnxChange1} />
-            <Textarea value={newThnx2} placeholder= "I'm also grateful for..." onChange={onNewThnxChange2} />
-            <Textarea value={newThnx3} placeholder= "And I'm grateful for..." onChange={onNewThnxChange3} />
-          </TextAreaContainer>
-          <Button type="submit">SUBMIT</Button>
+   <><>
+   </><form onSubmit={onFormSubmit}>
+       <InputWrapper>
+	<nav role='navigation'>
+		<div id="menuToggle">
+			<input type="checkbox" />
+			<span></span>
+			<span></span>
+			<span></span>
+			<ul id="menu">
           <Link to="/calendar">
-          <Button>Go to calendarview</Button>
+					<li>Old thnx</li>
           </Link>
-
-          <Button
-                type="button"
-                onClick={() => {
-                  location.reload()
-                }}
-            >
-              Logout
-              </Button>
-        </InputWrapper>
-    </form>
+          <Link to="/about">
+					<li>About</li>
+          </Link>
+				  <Link onClick={() => {
+                location.reload()
+                }}>
+					<li>Logout</li>
+          </Link>
+			</ul>
+		</div>
+	</nav>
+         <h1>WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
+         <TextAreaContainer>
+           <Textarea value={newThnx1} placeholder="I'm grateful for..." onChange={onNewThnxChange1} />
+           <Textarea value={newThnx2} placeholder="I'm also grateful for..." onChange={onNewThnxChange2} />
+           <Textarea value={newThnx3} placeholder="And I'm grateful for..." onChange={onNewThnxChange3} />
+         </TextAreaContainer>
+         <Button type="submit">SUBMIT</Button>
+       </InputWrapper>
+     </form></>
  )
 };
 
@@ -124,5 +134,5 @@ const Textarea = styled.textarea`
 `;
 
 const InputWrapper = styled(MainWrapper)`
-	height: 800px;
+	height: 500px;
 `;

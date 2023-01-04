@@ -45,12 +45,40 @@ export const CalendarViewPage = () => {
       fetchThnx();
   }, []);
 
-  return (
-    
-    <MainTextWrapper>
-      <OuterThnxWrapper>
-        {isLoading && <LoadingPage />}
+    return (
+        
+        <MainTextWrapper>
+            <OuterThnxWrapper>
+            <nav role='navigation'>
+		<div id="menuToggle">
+			<input type="checkbox" />
+			<span></span>
+			<span></span>
+			<span></span>
+			<ul id="menu">
+          <Link to="/input">
+					<li>Write new thnx</li>
+          </Link>
+          <Link to="/about">
+					<li>About</li>
+          </Link>
+				  <Link onClick={() => {
+                location.reload()
+                }}>
+					<li>Logout</li>
+          </Link>
+			</ul>
+		</div>
+	</nav>
+            {isLoading && <LoadingPage />}
 
+            {/* <div>todays date is: {today}</div> */}
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+         
+         
         {thnxList.map((singleThnx) => {
           return (
             <ThnxWrapper>
