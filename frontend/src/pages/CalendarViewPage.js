@@ -55,7 +55,7 @@ export const CalendarViewPage = () => {
           return (
             <ThnxWrapper>
               <div key={singleThnx._id}>
-                <ThnxDate>{singleThnx.createdAt}</ThnxDate>
+                <ThnxDate>{new Date(singleThnx.createdAt).toLocaleDateString()}</ThnxDate>
                 <ThnxText>{singleThnx.text1}</ThnxText>
                 <ThnxText>{singleThnx.text2}</ThnxText>
                 <ThnxText>{singleThnx.text3}</ThnxText>
@@ -79,10 +79,9 @@ export const CalendarViewPage = () => {
 }
 
 const MainTextWrapper = styled(MainWrapper)`
-    height: 70vh;
+    height: 80vh;
     color: var(--color-black);
     padding: 35px 20px;
-    
 `;
 
 const ThnxWrapper = styled.div`
@@ -94,7 +93,6 @@ const ThnxWrapper = styled.div`
     padding: 10px;
     box-shadow: 0 0 15px lightgreen;
     border: 2px solid var(--color-darkBrown);
-  
 `; 
 
 const OuterThnxWrapper = styled.div`
@@ -106,11 +104,9 @@ const OuterThnxWrapper = styled.div`
 
 const ThnxText = styled.p `
     margin: 5px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-family: 'Inter', sans-serif;
-    border: 1px solid grey;
-    border-radius: 3px;
-    padding: 5px;
+    padding: 3px;
     
 `;
 
