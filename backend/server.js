@@ -172,7 +172,7 @@ app.get('/thnxs', async (req, res) => {
   const accessToken = req.header('Authorization');
   try {
     const user = await User.findOne({ accessToken });
-    const thnxs = await Thnx.find({ ownerId: user._id }).limit(2);
+    const thnxs = await Thnx.find({ ownerId: user._id }).limit(5);
     res.status(200).json({ success: true, response: thnxs })
   } catch (error) {
     res.status(400).json({ success: false, response: error });

@@ -9,89 +9,91 @@ import styled from 'styled-components';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 
 export const CalendarViewPage = () => {
-    const [thnxList, setThnxList] = useState ([]);
-    const isLoading = useSelector((store) => store.user.isLoading);
-    const accessToken = useSelector((store) => store.user.accessToken);
+  const [thnxList, setThnxList] = useState ([]);
+  const isLoading = useSelector((store) => store.user.isLoading);
+  const accessToken = useSelector((store) => store.user.accessToken);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (!accessToken) {
-          navigate('/');
+  useEffect(() => {
+      if (!accessToken) {
+        navigate('/');
         }
       }, [accessToken, navigate]);
 
-    // gets all the thnxs for each user and puts them in the list
-    const fetchThnx = () => {
+  // gets all the thnxs for each user and puts them in the list
+  const fetchThnx = () => {
 
-        const options = {
-            method: 'GET',
-            headers: {
-                'Authorization': accessToken
-            },
-          };
+    const options = {
+      method: 'GET',
+      headers: {
+        'Authorization': accessToken
+      },
+    };
 
-        dispatch(user.actions.setLoading(true));
-        fetch(API_URL('thnxs'), options)
-            .then((res) => res.json())
-            .then((data) => setThnxList(data.response))  
-            .catch((error) => console.error(error))
-            .finally(() => dispatch(user.actions.setLoading(false)));
-    }
+      dispatch(user.actions.setLoading(true));
+      fetch(API_URL('thnxs'), options)
+        .then((res) => res.json())
+        .then((data) => setThnxList(data.response))  
+        .catch((error) => console.error(error))
+        .finally(() => dispatch(user.actions.setLoading(false)));
+  };
 
     // calls for the fetchThnx function everytime the page is reloaded
-    useEffect(() => {
-        fetchThnx();
-    }, []);
+  useEffect(() => {
+      fetchThnx();
+  }, []);
 
-    return (
-        
-        <MainWrapper>
-            <OuterThnxWrapper>
-            {isLoading && <LoadingPage />}
+  return (
+    
+    <MainTextWrapper>
+      <OuterThnxWrapper>
+        {isLoading && <LoadingPage />}
 
-            {/* <div>todays date is: {today}</div> */}
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-         
-            {thnxList.map((singleThnx) => {
-                return (
-                    <ThnxWrapper>
-                    <div key={singleThnx._id}>
-                        <ThnxDate>{singleThnx.createdAt}</ThnxDate>
-                        <ThnxText>1: {singleThnx.text1}</ThnxText>
-                        <ThnxText>2: {singleThnx.text2}</ThnxText>
-                        <ThnxText>3: {singleThnx.text3}</ThnxText>
-                    </div>
-                    </ThnxWrapper>
+        {thnxList.map((singleThnx) => {
+          return (
+            <ThnxWrapper>
+              <div key={singleThnx._id}>
+                <ThnxDate>{singleThnx.createdAt}</ThnxDate>
+                <ThnxText>{singleThnx.text1}</ThnxText>
+                <ThnxText>{singleThnx.text2}</ThnxText>
+                <ThnxText>{singleThnx.text3}</ThnxText>
+              </div>
+            </ThnxWrapper>
                 
-                )
-            })}
-
-
-            <Button
-                type="button"
-                onClick={() => {
-                location.reload()
-                }}
-            >Logout</Button>
-            <Link to="/input">
-            <Button>Go to input-page
-            </Button>
-            </Link>
-            </OuterThnxWrapper>
-        </MainWrapper>
-    )
+          )
+        })}
+        <Button type="button" onClick={() => {}}>
+          LOAD MORE
+        </Button>
+        <Button type="button" onClick={() => {location.reload()}}>
+          LOGOUT
+        </Button>
+        <Link to="/input">
+          <Button>Go to input-page</Button>
+        </Link>
+      </OuterThnxWrapper>
+    </MainTextWrapper>
+  )
 }
 
+const MainTextWrapper = styled(MainWrapper)`
+    height: 70vh;
+    color: var(--color-black);
+    padding: 35px 20px;
+    
+`;
+
 const ThnxWrapper = styled.div`
-    background-color: red;
+    background-color: var(--color-whiteTransp);
     heigth: 40%;
-    width: 70%;
-    margin: 5px 10px;
+    width: 60%;
+    margin: 10px 10px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 15px lightgreen;
+    border: 2px solid var(--color-darkBrown);
   
 `; 
 
@@ -103,10 +105,17 @@ const OuterThnxWrapper = styled.div`
 `;
 
 const ThnxText = styled.p `
-    margin: 0px;
-    font-size: 16px;
+    margin: 5px;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 5px;
+    
 `;
 
-const ThnxDate = styled(ThnxText)`
-
+const ThnxDate = styled.p`
+    text-align: center;
+    font-weight: bold;
+    margin: 3px 0px;
 `;
