@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LoadingPage } from '../pages/LoadingPage';
 import { Button } from '../styledComponents/Button';
 import { user } from '../reducers/user';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 
 export const CalendarViewPage = () => {
@@ -49,12 +49,7 @@ export const CalendarViewPage = () => {
         
         <MainTextWrapper>
             <OuterThnxWrapper>
-          <Button onClick={() => {
-                location.reload()
-                }}>LOG OUT</Button>
-                <Button onClick={() => {
-                  navigate('/input')
-                }}>Add todays thnx</Button>
+          
                 
             {isLoading && <LoadingPage />}
 
@@ -83,6 +78,12 @@ export const CalendarViewPage = () => {
           <Button>Go to input-page</Button>
         </Link>
       </OuterThnxWrapper>
+      <Button onClick={() => {
+                location.reload()
+                }}>LOG OUT</Button>
+                <Button onClick={() => {
+                  navigate('/input')
+                }}>Add todays thnx</Button>
     </MainTextWrapper>
   )
 }
@@ -100,8 +101,7 @@ const ThnxWrapper = styled.div`
     margin: 10px 10px;
     border-radius: 5px;
     padding: 10px;
-    box-shadow: 0 0 15px lightgreen;
-    border: 2px solid var(--color-darkBrown);
+    box-shadow: 0 0 20px var(--color-orange);
 `; 
 
 const OuterThnxWrapper = styled.div`

@@ -78,6 +78,7 @@ export const LoginPage = () => {
 
 // Test log in section
 return (
+  <>
 	<MainWrapper>
       <input type="checkbox" id="chk" aria-hidden="true" />
 			<div class="login">
@@ -102,7 +103,7 @@ return (
 
         <div className="register">
           <form onSubmit={onFormSubmit}>
-					<label for="chk" aria-hidden="true" onClick={onToggleClick}> Register </label>
+					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Register </label>
           <Input 
               type="text" 
               name="txt" 
@@ -121,9 +122,10 @@ return (
           </PasswordRequirements>
 					<Button> Register </Button>
           </form>
-        </div>
-      <Footer/>
+        </div>   
 	</MainWrapper>
+  <Footer/>
+  </>
   )
 }
 

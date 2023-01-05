@@ -95,7 +95,7 @@ if (!accessToken) {
           <ButtonContainer>
           <Button onClick={() => {
               navigate('/calendar')
-              }}>View old thnx</Button>
+              }}>VIEW OLD THNX</Button>
             <Button onClick={() => {
               location.reload()
               }}>LOG OUT</Button>

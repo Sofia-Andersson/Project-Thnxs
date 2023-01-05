@@ -15,13 +15,14 @@ const Img = styled.img`
     width: auto;
     z-index: 28;
     position: absolute;
-    bottom: -40px;
+    bottom: 15px;
 `;
 
 const FooterWrapper = styled.div`
     width: 100%;
     margin: 0 auto; 
     display: flex;
-    justify-content: center;
+    justify-content: center;s
     position: relative;
+    z-index: 10;
 `;
