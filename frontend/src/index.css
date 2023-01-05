@@ -9,27 +9,30 @@
 	--color-lightBrown: #8d633b;
 	--color-nougat:#a37e59;
 	--color-orangde: #DF7F02;
+	--color-grey: #e0dede;
+	--color-white: #eeeeee;
 	--color-whiteTransp: rgba(255, 255, 255, 0.815);
 }
 
 body{
+
+	font-family: 'Akshar', sans-serif;
+    background-image: url("./assets/background.jpg");
+    background-size: cover;
+    overflow: hidden;
 	margin: 0;
 	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	font-family: 'Akshar', sans-serif;
-    background-image: url("./assets/background.jpg");
-    background-size: cover;
-    overflow: hidden;
 }
 
 .main{
 	width: 350px;
 	height: 500px;
 	overflow: hidden;
-  /* background: linear-gradient(to bottom, #150d0b, #a37e59, #6e4c34); */
+  /* background: linear-gradient(to bottom, #150d0b, var(--color-nougat), var(--color-mediumBrown)); */
 	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
@@ -45,7 +48,7 @@ body{
 }
 
 h1 {
-color: #fff;
+	color: var(--color-white);
 	font-size: 1.5em;
     letter-spacing: 3px;
 	justify-content: center;
@@ -55,7 +58,7 @@ color: #fff;
 }
 
 label {
-	color: #fff;
+	color: var(--color-white);
 	font-size: 2.3em;
   	letter-spacing: 3px;
 	justify-content: center;
@@ -65,10 +68,11 @@ label {
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
+
 input{
 	width: 60%;
 	height: 20px;
-	background: #e0dede;
+	background-color: var(--color-grey);
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
@@ -78,16 +82,16 @@ input{
 	border-radius: 5px;
 }
 
-
 .register{
 	height: 460px;
-	background: #eee;
+	background: var(--color-white);
 	border-radius: 100% / 40%;
 	transform: translateY(-200px);
 	transition: .8s ease-in-out;
 }
+
 .register label{
-	color: #6e4c34;
+	color: var(--color-mediumBrown);
 	transform: scale(.6);
 	padding-top: 15px;
 }
@@ -104,7 +108,7 @@ input{
 	
 }
 
-/* Hamburger Menu */
+/* Hamburger Menu 1 */
 
 a {
 	text-decoration: none !important;
@@ -120,10 +124,17 @@ a:hover {
 	display: block;
 	position: absolute;
 	top:30px;
-	right: 40px;
+	right: -80px;
 	z-index: 1;
 	-webkit-user-select: none;
 	user-select: none;
+	overflow: hidden;
+	height: 300px;
+	width: 160px;
+}
+
+#menuToggle:active {
+	overflow: visible
 }
 
 #menuToggle input {
@@ -145,7 +156,7 @@ a:hover {
 	height: 4px;
 	margin-bottom: 5px;
 	position: relative;
-	background: #EEEEEE;
+	background: var(--color-white);
 	border-radius: 3px;
 	z-index: 1;
 	transform-origin: 4px 0px;
@@ -181,11 +192,11 @@ a:hover {
 #menu {
 	position: absolute;
 	width: 300px;
-	margin: -50px 0 0 0;
+	margin: -45px 0 0 0;
 	padding: 15px;
 	padding-top: 35px;
 	right: -160px;
-	background: #EEEEEE;
+	background: var(--color-white);
 	list-style-type: none;
 	-webkit-font-smoothing: antialiased;
 	transform-origin: 0% 0%;
@@ -204,3 +215,4 @@ a:hover {
 	transform: scale(1.0, 1.0);
 	opacity: 1;
 }
+

@@ -4,6 +4,7 @@ import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import { MainWrapper } from '../styledComponents/MainWrapper';
+import { Footer } from '../components/Footer';
 // import { user } from '../reducers/user';
 
 import { Button } from '../styledComponents/Button'
@@ -81,16 +82,16 @@ if (!accessToken) {
     )}; 
 
  return (
-   <><>
-   </><form onSubmit={onFormSubmit}>
-       <InputWrapper>
-	<nav role='navigation'>
-		<div id="menuToggle">
-			<input type="checkbox" />
-			<span></span>
-			<span></span>
-			<span></span>
-			<ul id="menu">
+   <>
+      <form onSubmit={onFormSubmit}>
+        <InputWrapper>
+	        <nav role='navigation'>
+		        <div id="menuToggle">
+			      <input type="checkbox" />
+			      <span></span>
+			      <span></span>
+			      <span></span>
+			      <ul id="menu">
           <Link to="/calendar">
 					<li>Old thnx</li>
           </Link>
@@ -113,7 +114,9 @@ if (!accessToken) {
          </TextAreaContainer>
          <Button type="submit">SUBMIT</Button>
        </InputWrapper>
-     </form></>
+     </form>
+     <Footer/>
+     </>
  )
 };
 

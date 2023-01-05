@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
+import { Footer } from '../components/Footer';
 
 // import { AboutPage } from './AboutPage';
 import { Link } from "react-router-dom";
@@ -94,45 +95,46 @@ return (
 			</ul>
 		</div>
 	</nav>  	
-		<input type="checkbox" id="chk" aria-hidden="true" />
+      <input type="checkbox" id="chk" aria-hidden="true" />
 			<div class="login">
-				<form onSubmit={onFormSubmit}>
+          <form onSubmit={onFormSubmit}>
 					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Login </label>
 					<input 
-            type="text" 
-            name="txt" 
+              type="text" 
+              name="txt" 
             placeholder="User name" 
-            required="" 
-            value={username}
-            onChange={(event) => setUsername(event.target.value)} />
+              required="" 
+              value={username}
+              onChange={(event) => setUsername(event.target.value)} />
 					<input 
-            type="password" 
-            name="pswd" 
-            placeholder="Password" 
+              type="password" 
+              name="pswd" 
+              placeholder="Password"
             required="" value={password}
-            onChange={(event) => setPassword(event.target.value)} />
+              onChange={(event) => setPassword(event.target.value)} />
 					<Button>Login</Button>
-				</form>
-			</div>
+          </form>
+        </div>
 
-			<div className="register">
-				<form onSubmit={onFormSubmit}>
+        <div className="register">
+          <form onSubmit={onFormSubmit}>
 					<label for="chk" aria-hidden="true" onClick={onToggleClick}> Register </label>
           <input 
-            type="text" 
-            name="txt" 
+              type="text" 
+              name="txt" 
             placeholder="User name" 
             required="" value={username}
-            onChange={(event) => setUsername(event.target.value)} />
+              onChange={(event) => setUsername(event.target.value)} />
 					<input 
-            type="password" 
-            name="pswd" 
-            placeholder="Password" 
+              type="password" 
+              name="pswd" 
+              placeholder="Password" 
             required="" value={password}
-            onChange={(event) => setPassword(event.target.value)} />
+              onChange={(event) => setPassword(event.target.value)} />
 					<Button> Register </Button>
-				</form>
-      </div>
+          </form>
+        </div>
+      <Footer/>
 	</MainWrapper>
   )
 }
