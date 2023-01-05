@@ -14,13 +14,14 @@ const Img = styled.img`
     height: 30px;
     width: auto;
     z-index: 28;
+    position: absolute;
+    bottom: -40px;
 `;
 
 const FooterWrapper = styled.div`
     width: 100%;
-    background-color: red;
-    padding: 25px;
     margin: 0 auto; 
     display: flex;
-    
+    justify-content: center;
+    position: relative;
 `;

@@ -71,7 +71,7 @@ export const InputPage = () => {
 }
 
 if (!accessToken) {
- return (
+  return (
     <>
       <h1>You are logged out</h1>
       <Link to="/">
@@ -79,44 +79,31 @@ if (!accessToken) {
       </Button>
       </Link>
     </>
-    )}; 
+    )};
 
- return (
-   <>
+  return (
+    <>
       <form onSubmit={onFormSubmit}>
         <InputWrapper>
-	        <nav role='navigation'>
-		        <div id="menuToggle">
-			      <input type="checkbox" />
-			      <span></span>
-			      <span></span>
-			      <span></span>
-			      <ul id="menu">
-          <Link to="/calendar">
-					<li>Old thnx</li>
-          </Link>
-          <Link to="/about">
-					<li>About</li>
-          </Link>
-				  <Link onClick={() => {
-                location.reload()
-                }}>
-					<li>Logout</li>
-          </Link>
-			</ul>
-		</div>
-	</nav>
-         <h1>WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
-         <TextAreaContainer>
-           <Textarea value={newThnx1} placeholder="I'm grateful for..." onChange={onNewThnxChange1} />
-           <Textarea value={newThnx2} placeholder="I'm also grateful for..." onChange={onNewThnxChange2} />
-           <Textarea value={newThnx3} placeholder="And I'm grateful for..." onChange={onNewThnxChange3} />
-         </TextAreaContainer>
-         <Button type="submit">SUBMIT</Button>
+          <h1>WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
+          <TextAreaContainer>
+            <Textarea value={newThnx1} placeholder="I'm grateful for..." onChange={onNewThnxChange1} />
+            <Textarea value={newThnx2} placeholder="I'm also grateful for..." onChange={onNewThnxChange2} />
+            <Textarea value={newThnx3} placeholder="And I'm grateful for..." onChange={onNewThnxChange3} />
+          </TextAreaContainer>
+          <Button type="submit">SUBMIT</Button>
+          <ButtonContainer>
+          <Button onClick={() => {
+              navigate('/calendar')
+              }}>View old thnx</Button>
+            <Button onClick={() => {
+              location.reload()
+              }}>LOG OUT</Button>
+          </ButtonContainer>
        </InputWrapper>
      </form>
      <Footer/>
-     </>
+    </>
  )
 };
 
@@ -137,5 +124,11 @@ const Textarea = styled.textarea`
 `;
 
 const InputWrapper = styled(MainWrapper)`
-	height: 500px;
+	height: 550px;
+`;
+
+const ButtonContainer = styled.div`
+  padding: 0 15px;
+  display: flex;
+  gap: 20px;
 `;

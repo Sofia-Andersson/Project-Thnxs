@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
@@ -79,22 +79,6 @@ export const LoginPage = () => {
 // Test log in section
 return (
 	<MainWrapper>
-    <nav role='navigation'>
-		<div id="menuToggle">
-			<input type="checkbox" />
-			<span></span>
-			<span></span>
-			<span></span>
-			<ul id="menu">
-          <Link to="/calendar">
-					<li>How to</li>
-          </Link>
-          <Link to="/about">
-					<li>About</li>
-          </Link>
-			</ul>
-		</div>
-	</nav>  	
       <input type="checkbox" id="chk" aria-hidden="true" />
 			<div class="login">
           <form onSubmit={onFormSubmit}>
@@ -119,18 +103,22 @@ return (
         <div className="register">
           <form onSubmit={onFormSubmit}>
 					<label for="chk" aria-hidden="true" onClick={onToggleClick}> Register </label>
-          <input 
+          <Input 
               type="text" 
               name="txt" 
             placeholder="User name" 
             required="" value={username}
               onChange={(event) => setUsername(event.target.value)} />
-					<input 
+					<Input 
               type="password" 
               name="pswd" 
               placeholder="Password" 
             required="" value={password}
               onChange={(event) => setPassword(event.target.value)} />
+          <PasswordRequirements>
+          <PasswordRequirementsP>Password minimum 8 charachters</PasswordRequirementsP>    
+          {password.length > 7 ? (<PasswordRequirementsP><b>✓</b></PasswordRequirementsP>) : ""}
+          </PasswordRequirements>
 					<Button> Register </Button>
           </form>
         </div>
@@ -138,6 +126,21 @@ return (
 	</MainWrapper>
   )
 }
+
+const PasswordRequirementsP = styled.p`
+  margin: 0 3px;
+`;
+
+const PasswordRequirements = styled.div`
+  display: flex; 
+  font-size: 12px;
+  margin: 0 60px;
+  color: #919090
+`;
+
+const Input = styled.input`
+  margin: 20px 60px 5px 60px;
+`;
 
 // Former log in section:
 /* return (
