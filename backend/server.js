@@ -167,12 +167,13 @@ const authenticateUser = async (req, res, next) => {
 
 // returns all thnxs for a specific logged in user using accessToken to get user._id
 // and then search for ownerId
-app.get('/thnxs', authenticateUser);
-app.get('/thnxs', async (req, res) => {
+app.get('/thnxs/:limitValue', authenticateUser);
+app.get('/thnxs/:limitValue', async (req, res) => {
   const accessToken = req.header('Authorization');
+  const { limitValue } = req.params;
   try {
     const user = await User.findOne({ accessToken });
-    const thnxs = await Thnx.find({ ownerId: user._id }).sort({createdAt: "desc"}).limit(5);
+    const thnxs = await Thnx.find({ ownerId: user._id }).sort({createdAt: "desc"}).limit(limitValue);
     res.status(200).json({ success: true, response: thnxs })
   } catch (error) {
     res.status(400).json({ success: false, response: error });

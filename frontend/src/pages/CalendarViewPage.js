@@ -10,6 +10,7 @@ import { MainWrapper } from '../styledComponents/MainWrapper';
 
 export const CalendarViewPage = () => {
   const [thnxList, setThnxList] = useState ([]);
+  const [limit, setLimit] = useState(5)
   const isLoading = useSelector((store) => store.user.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
 
@@ -43,18 +44,17 @@ export const CalendarViewPage = () => {
     // calls for the fetchThnx function everytime the page is reloaded
   useEffect(() => {
       fetchThnx();
-  }, []);
+  }, [limit]);
 
-    return (
-        
-        <MainTextWrapper>
-            <OuterThnxWrapper>
-          
-                
-            {isLoading && <LoadingPage />}
+  const loadMore = () => {
+    setLimit(limit+5)
+  };
 
-         
-         
+  return (
+    <MainTextWrapper>
+      <OuterThnxWrapper> 
+        {isLoading && <LoadingPage />}
+
         {thnxList.map((singleThnx) => {
           return (
             <ThnxWrapper>
@@ -64,26 +64,30 @@ export const CalendarViewPage = () => {
                 <ThnxText>{singleThnx.text2}</ThnxText>
                 <ThnxText>{singleThnx.text3}</ThnxText>
               </div>
-            </ThnxWrapper>
-                
+            </ThnxWrapper>      
           )
         })}
-        <Button type="button" onClick={() => {}}>
-          LOAD MORE
-        </Button>
+
+        <Button type="button" onClick={loadMore}>LOAD MORE</Button>
+
         <Button type="button" onClick={() => {location.reload()}}>
           LOGOUT
         </Button>
+
         <Link to="/input">
           <Button>Go to input-page</Button>
         </Link>
+
       </OuterThnxWrapper>
-      <Button onClick={() => {
-                location.reload()
-                }}>LOG OUT</Button>
-                <Button onClick={() => {
-                  navigate('/input')
-                }}>Add todays thnx</Button>
+      
+      <Button onClick={() => {location.reload()}}>
+        LOG OUT
+      </Button>
+
+      <Button onClick={() => {navigate('/input')}}>
+        Add todays thnx
+      </Button>
+      
     </MainTextWrapper>
   )
 }
