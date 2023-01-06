@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Button } from '../styledComponents/Button';
 import styled from 'styled-components';
 import { MainWrapper } from '../styledComponents/MainWrapper';
+import { Footer } from '../components/Footer';
 
 export const AboutPage = () => {
     return (
+    <>
     <AboutWrapper>
     <div>
         <h2>THNX is a gratitude journal created to facilitate your daily writing.</h2>
@@ -24,12 +26,14 @@ export const AboutPage = () => {
 8. Write regularly. Whether you write daily or every other day, commit to a regular time to journal, then honor that commitment.</AboutP> 
     </div>    
     <div>
-    <p><span>Thnx </span>is built by<a href='https://cute-starburst-1d7ef1.netlify.app/'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</p>
+    <CreatedByP><span>THNX </span>is built by <a href='https://cute-starburst-1d7ef1.netlify.app/'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</CreatedByP>
     <Link to="/">
-        <Button>Ok, lets go to the startpage</Button>
+        <Button>BACK TO STARTPAGE</Button>
     </Link>
     </div>
     </AboutWrapper>
+ <Footer/>
+ </>
  );
 };
 
@@ -38,10 +42,16 @@ font-size: 12px;
 `;
 
 const AboutWrapper = styled(MainWrapper)`
-    padding: 40px;
+    padding: 20px 40px;
     margin: 50px; 0;
     width: 70vw;
-    color: #EEEEEE;
-    height: 650px;
+    color: var(--color-white);
+    height: 450px;
     overflow: scroll;
+`;
+
+const CreatedByP = styled.p`
+a {
+    color: #0d0807;
+}
 `;

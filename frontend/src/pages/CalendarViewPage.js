@@ -7,6 +7,7 @@ import { Button } from '../styledComponents/Button';
 import { user } from '../reducers/user';
 import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
+import { Footer } from '../components/Footer';
 
 export const CalendarViewPage = () => {
   const [thnxList, setThnxList] = useState ([]);
@@ -51,49 +52,53 @@ export const CalendarViewPage = () => {
   };
 
   return (
-    <MainTextWrapper>
-      <OuterThnxWrapper> 
-        {isLoading && <LoadingPage />}
+    <>
+      <MainTextWrapper>
+        <OuterThnxWrapper> 
+          {isLoading && <LoadingPage />}
 
-        {thnxList.map((singleThnx) => {
-          return (
-            <ThnxWrapper>
-              <div key={singleThnx._id}>
-                <ThnxDate>{new Date(singleThnx.createdAt).toLocaleDateString()}</ThnxDate>
-                <ThnxText>{singleThnx.text1}</ThnxText>
-                <ThnxText>{singleThnx.text2}</ThnxText>
-                <ThnxText>{singleThnx.text3}</ThnxText>
-              </div>
-            </ThnxWrapper>      
-          )
-        })}
+          {thnxList.map((singleThnx) => {
+            return (
+              <ThnxWrapper>
+                <div key={singleThnx._id}>
+                  <ThnxDate>{new Date(singleThnx.createdAt).toLocaleDateString()}</ThnxDate>
+                  <ThnxText>{singleThnx.text1}</ThnxText>
+                  <ThnxText>{singleThnx.text2}</ThnxText>
+                  <ThnxText>{singleThnx.text3}</ThnxText>
+                </div>
+              </ThnxWrapper>      
+            )
+          })}
 
-        <Button type="button" onClick={loadMore}>LOAD MORE</Button>
+          <Button type="button" onClick={loadMore}>LOAD MORE</Button>
 
-        <Button type="button" onClick={() => {location.reload()}}>
-          LOGOUT
+          <Button type="button" onClick={() => {location.reload()}}>
+            LOGOUT
+          </Button>
+
+          <Link to="/input">
+            <Button>Go to input-page</Button>
+          </Link>
+
+        </OuterThnxWrapper>
+        
+        <Button onClick={() => {location.reload()}}>
+          LOG OUT
         </Button>
 
-        <Link to="/input">
-          <Button>Go to input-page</Button>
-        </Link>
+        <Button onClick={() => {navigate('/input')}}>
+          Add todays thnx
+        </Button>
+        
+      </MainTextWrapper>
 
-      </OuterThnxWrapper>
-      
-      <Button onClick={() => {location.reload()}}>
-        LOG OUT
-      </Button>
-
-      <Button onClick={() => {navigate('/input')}}>
-        Add todays thnx
-      </Button>
-      
-    </MainTextWrapper>
+    <Footer/>
+    </>
   )
 }
 
 const MainTextWrapper = styled(MainWrapper)`
-    height: 80vh;
+    height: 70vh;
     color: var(--color-black);
     padding: 35px 20px;
 `;

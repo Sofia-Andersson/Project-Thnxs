@@ -10,7 +10,7 @@
 	--color-nougat:#a37e59;
 	--color-orange: #DF7F02;
 	--color-grey: #e0dede;
-	--color-lightgrey:#919090;
+	--color-darkgrey:#919090;
 	--color-white: #eeeeee;
 	--color-whiteTransp: rgba(255, 255, 255, 0.815);
 }
@@ -24,11 +24,17 @@ body{
 	padding: 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+
 	min-height: 100vh;
+
+	@media (min-width: 668px) {
+		align-items: center;
+	}
 }
 
-
+a {
+	text-decoration: none; 
+}
 
 #chk{
 	display: none;
@@ -45,7 +51,7 @@ h1 {
     letter-spacing: 3px;
 	justify-content: center;
 	display: flex;
-	margin: 40px 60px 20px;
+	margin: 40px 30px 20px;
 	font-weight: bold;
 }
 

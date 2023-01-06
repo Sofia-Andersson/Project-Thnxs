@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const Button = styled.button `
-  width: 60%;
+  width: 70%;
   height: 40px;
   margin: 10px auto;
   justify-content: center;
@@ -20,5 +20,9 @@ export const Button = styled.button `
   font-family: 'Akshar', sans-serif;
   
   &:hover { background-color: var(--color-black) }
- 
+
+  a {
+    color: #0d0807; 
+    text-decoration:none;
+  }
 `;

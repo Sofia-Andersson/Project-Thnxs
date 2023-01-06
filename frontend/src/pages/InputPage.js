@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 // import { user } from '../reducers/user';
@@ -15,6 +15,7 @@ export const InputPage = () => {
   const [newThnx2, setNewThnx2] = useState('');
   const [newThnx3, setNewThnx3] = useState('');
   const accessToken = useSelector((store) => store.user.accessToken);
+  const username = useSelector((store) => store.user.username);
   // const textOne = useSelector((store) => store.input.textOne);
   // console.log(textOne)
 
@@ -67,50 +68,53 @@ export const InputPage = () => {
       .catch((error) => console.error(error))
       .finally(() => setNewThnx1(''), setNewThnx2(''), setNewThnx3(''));
 
-      alert("Great job!");
-}
+    alert("Great job!");  
+    navigate('/calendar')
+  }
 
-if (!accessToken) {
-  return (
-    <>
-      <h1>You are logged out</h1>
-      <Link to="/">
-      <Button>Go to Login-page
-      </Button>
-      </Link>
-    </>
-    )};
+  if (!accessToken) {
+    return (
+      <>
+        <h1>You are logged out</h1>
+        <Link to="/">
+        <Button>Go to Login-page
+        </Button>
+        </Link>
+      </>
+      )};
 
-  return (
-    <>
-      <form onSubmit={onFormSubmit}>
+    return (
+      <>
         <InputWrapper>
-          <h1>WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
-          <TextAreaContainer>
-            <Textarea value={newThnx1} placeholder="I'm grateful for..." onChange={onNewThnxChange1} />
-            <Textarea value={newThnx2} placeholder="I'm also grateful for..." onChange={onNewThnxChange2} />
-            <Textarea value={newThnx3} placeholder="And I'm grateful for..." onChange={onNewThnxChange3} />
-          </TextAreaContainer>
-          <Button type="submit">SUBMIT</Button>
-          <ButtonContainer>
-          <Button onClick={() => {
-              navigate('/calendar')
-              }}>VIEW OLD THNX</Button>
-            <Button onClick={() => {
-              location.reload()
-              }}>LOG OUT</Button>
-          </ButtonContainer>
-       </InputWrapper>
-     </form>
-     <Footer/>
-    </>
- )
+          <form onSubmit={onFormSubmit}>
+            <h1>HI {username.toUpperCase()}, WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
+            <TextAreaContainer>
+              <Textarea value={newThnx1} placeholder="I'm grateful for..." onChange={onNewThnxChange1} />
+              <Textarea value={newThnx2} placeholder="I'm also grateful for..." onChange={onNewThnxChange2} />
+              <Textarea value={newThnx3} placeholder="And I'm grateful for..." onChange={onNewThnxChange3} />
+            </TextAreaContainer>
+            <Button type="submit">SUBMIT</Button>
+          </form>
+            <ButtonContainer>
+            <SmallButton onClick={() => {
+                navigate('/calendar')
+                }}>VIEW OLD THNX</SmallButton>
+              <SmallButton onClick={() => {
+                location.reload()
+                }}>LOG OUT</SmallButton>
+            </ButtonContainer>
+        </InputWrapper>
+      
+        <Footer/>
+      </>
+    )
 };
 
 const TextAreaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 20px;
+  justify-content: center;
+  padding: 0px 25px;
 `; 
 
 const Textarea = styled.textarea`
@@ -124,11 +128,18 @@ const Textarea = styled.textarea`
 `;
 
 const InputWrapper = styled(MainWrapper)`
-	height: 550px;
+	height: 510px;
 `;
 
 const ButtonContainer = styled.div`
+  width: 70%;  
   padding: 0 15px;
   display: flex;
   gap: 20px;
+  margin: 0 auto;
+`;
+
+const SmallButton = styled(Button)`
+  font-size: 14px;
+  margin-top:0;
 `;

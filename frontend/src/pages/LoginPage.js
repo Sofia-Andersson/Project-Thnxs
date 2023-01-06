@@ -97,7 +97,7 @@ return (
               placeholder="Password"
             required="" value={password}
               onChange={(event) => setPassword(event.target.value)} />
-					<Button>Login</Button>
+					<Button>LOGIN</Button>
           </form>
         </div>
 
@@ -120,7 +120,7 @@ return (
           <PasswordRequirementsP>Password minimum 8 charachters</PasswordRequirementsP>    
           {password.length > 7 ? (<PasswordRequirementsP><b>✓</b></PasswordRequirementsP>) : ""}
           </PasswordRequirements>
-					<Button> Register </Button>
+					<Button>REGISTER</Button>
           </form>
         </div>   
 	</MainWrapper>
@@ -137,7 +137,7 @@ const PasswordRequirements = styled.div`
   display: flex; 
   font-size: 12px;
   margin: 0 60px;
-  color: #919090
+  color: var(--color-darkgrey);
 `;
 
 const Input = styled.input`
