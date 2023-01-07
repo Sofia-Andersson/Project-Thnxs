@@ -10,7 +10,7 @@ import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 
 export const CalendarViewPage = () => {
-  const [thnxList, setThnxList] = useState ([]);
+  const [thnxList, setThnxList] = useState([]);
   const [limit, setLimit] = useState(5)
   const isLoading = useSelector((store) => store.user.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
@@ -36,7 +36,11 @@ export const CalendarViewPage = () => {
 
       dispatch(user.actions.setLoading(true));
       fetch(API_URL('thnxs'), options)
-        .then((res) => res.json())
+        .then(async (res) => {
+          const json = await res.json();
+          console.log(json);
+          return json;
+        })
         .then((data) => setThnxList(data.response))  
         .catch((error) => console.error(error))
         .finally(() => dispatch(user.actions.setLoading(false)));
