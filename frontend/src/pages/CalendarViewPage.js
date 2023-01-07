@@ -130,6 +130,7 @@ const ThnxText = styled.p `
     font-size: 0.7rem;
     font-family: 'Inter', sans-serif;
     padding: 3px;
+    text-align:center;
     
 `;
 

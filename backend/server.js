@@ -200,7 +200,7 @@ app.get('/thnxs', async (req, res) => {
         $gte: (todayMinusFour),
         $lte: (today)
       }
-    }).sort({date: -1}).limit(limit);
+    }).sort({createdAt: -1}).limit(limit);
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
