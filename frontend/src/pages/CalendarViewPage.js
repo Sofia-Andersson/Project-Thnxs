@@ -82,7 +82,7 @@ export const CalendarViewPage = () => {
           </Button>
 
           <Link to="/input">
-            <Button>Go to input-page</Button>
+            <Button>INPUT PAGE</Button>
           </Link>
 
         </OuterThnxWrapper>
