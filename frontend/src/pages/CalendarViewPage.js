@@ -75,24 +75,16 @@ export const CalendarViewPage = () => {
             )
           })}
 
-          <Button type="button" onClick={loadMore}>LOAD MORE</Button>
-
-          <Button type="button" onClick={() => {location.reload()}}>
-            LOGOUT
-          </Button>
-
-          <Link to="/input">
-            <Button>INPUT PAGE</Button>
-          </Link>
+        <Button type="button" onClick={loadMore}>LOAD MORE</Button>
 
         </OuterThnxWrapper>
         
-        <Button onClick={() => {(navigate('/'))}}>
-          LOG OUT
-        </Button>
-
         <Button onClick={() => {navigate('/input')}}>
           Add todays thnx
+        </Button>
+
+        <Button onClick={() => {(navigate('/'))}}>
+          LOG OUT
         </Button>
         
       </MainTextWrapper>
