@@ -11,7 +11,7 @@ import { Footer } from '../components/Footer';
 
 export const CalendarViewPage = () => {
   const [thnxList, setThnxList] = useState([]);
-  const [limit, setLimit] = useState(5)
+  const [limit, setLimit] = useState(2)
   const isLoading = useSelector((store) => store.user.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
 
@@ -25,8 +25,7 @@ export const CalendarViewPage = () => {
       }, [accessToken, navigate]);
 
   // gets all the thnxs for each user and puts them in the list
-  const fetchThnx = () => {
-
+  const fetchThnx = useCallback(() => {
     const options = {
       method: 'GET',
       headers: {
@@ -35,16 +34,18 @@ export const CalendarViewPage = () => {
     };
 
       dispatch(user.actions.setLoading(true));
-      fetch(API_URL('thnxs'), options)
+      fetch(API_URL('thnxs?limit=' + limit), options)
         .then(async (res) => {
           const json = await res.json();
           console.log(json);
-          return json;
+          // {success: ..., thnxFrom...}
+          console.log(json.success);
+          setThnxList(json.thnxFromSpecificDate.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
         })
-        .then((data) => setThnxList(data.response))  
+        // .then((data) => setThnxList(data.response))  
         .catch((error) => console.error(error))
         .finally(() => dispatch(user.actions.setLoading(false)));
-  };
+  }, [limit]);
 
     // calls for the fetchThnx function everytime the page is reloaded
   useEffect(() => {

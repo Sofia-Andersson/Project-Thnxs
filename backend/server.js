@@ -184,6 +184,8 @@ app.get('/thnxs/:limitValue', async (req, res) => {
 app.get('/thnxs', authenticateUser);
 app.get('/thnxs', async (req, res) => {
   const today = new Date();
+  const limit = req.query.limit ?? 200;
+
   console.log("today: ", today);
   const todayMinusFour = new Date();
   todayMinusFour.setDate(today.getDate() - 4);
@@ -198,7 +200,7 @@ app.get('/thnxs', async (req, res) => {
         $gte: (todayMinusFour),
         $lte: (today)
       }
-    });
+    }).limit(limit);
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
