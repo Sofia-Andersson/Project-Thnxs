@@ -185,7 +185,8 @@ app.get('/thnxs', authenticateUser);
 app.get('/thnxs', async (req, res) => {
   const today = new Date();
   console.log("today: ", today);
-  const todayMinusFour = (new Date()).setDate(today.getDate() - 4);
+  const todayMinusFour = new Date();
+  todayMinusFour.setDate(today.getDate() - 4);
   console.log("t minus 4:", todayMinusFour);
 
   const accessToken = req.header('Authorization');
