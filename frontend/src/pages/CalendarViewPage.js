@@ -106,6 +106,7 @@ const MainTextWrapper = styled(MainWrapper)`
     height: 70vh;
     color: var(--color-black);
     padding: 35px 20px;
+    overflow: scroll;
 `;
 
 const ThnxWrapper = styled.div`
@@ -122,7 +123,6 @@ const OuterThnxWrapper = styled.div`
     display: flex; 
     flex-direction: column;
     align-items: center;
-    
 `;
 
 const ThnxText = styled.p `
