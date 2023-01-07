@@ -180,6 +180,30 @@ app.get('/thnxs/:limitValue', async (req, res) => {
   }
 });
 
+// return thnxs from today and 4 previous days
+app.get('/thnxs', authenticateUser);
+app.get('/thnxs', async (req, res) => {
+  const today = new Date();
+  console.log("today: ", today);
+  const todayMinusFour = (new Date()).setDate(today.getDate() - 4);
+  console.log("t minus 4:", todayMinusFour);
+
+  const accessToken = req.header('Authorization');
+  const singleUser = await User.findOne({ accessToken });
+  try {
+    const thnxFromSpecificDate = await Thnx.find({
+      ownerId: singleUser._id,
+      createdAt: {
+        $gte: (todayMinusFour),
+        $lte: (today)
+      }
+    });
+    res.status(200).json({ success: true, thnxFromSpecificDate })
+  } catch (error) {
+    res.status(400).json({ success: false, response: error });
+  }
+});
+
 // return thnx from specific user and date
 app.get('/thnxs/:date', authenticateUser);
 app.get('/thnxs/:date', async (req, res) => {
