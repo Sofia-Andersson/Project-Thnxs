@@ -99,9 +99,7 @@ export const InputPage = () => {
             <SmallButton onClick={() => {
                 navigate('/calendar')
                 }}>VIEW OLD THNX</SmallButton>
-              <SmallButton onClick={() => {
-                location.reload()
-                }}>LOG OUT</SmallButton>
+              <SmallButton onClick={() => {(navigate('/'))}}>LOG OUT</SmallButton>
             </ButtonContainer>
         </InputWrapper>
       

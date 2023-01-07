@@ -87,7 +87,7 @@ export const CalendarViewPage = () => {
 
         </OuterThnxWrapper>
         
-        <Button onClick={() => {location.reload()}}>
+        <Button onClick={() => {(navigate('/'))}}>
           LOG OUT
         </Button>
 
