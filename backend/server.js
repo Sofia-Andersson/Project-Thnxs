@@ -273,7 +273,7 @@ const oneThnxPerDayLimit = async (req, res, next) => {
 // for the inlogged user to post a thnx with 3 texts
 // updates ownerId with the user._id
 app.post('/thnxs', authenticateUser);
-app.post('/thnxs', oneThnxPerDayLimit);
+// app.post('/thnxs', oneThnxPerDayLimit);
 app.post('/thnxs', async (req, res) => {
   const accessToken = req.header('Authorization');
   const user = await User.findOne({ accessToken });
