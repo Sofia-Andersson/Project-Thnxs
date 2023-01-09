@@ -6,9 +6,11 @@ import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 import { user } from '../reducers/user';
+import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button'
+
 // import { user } from '../reducers/user';
 
-import { Button } from '../styledComponents/Button'
+
 
 // importera komponenterna
 export const InputPage = () => { 
@@ -136,15 +138,3 @@ const InputWrapper = styled(MainWrapper)`
 	height: 510px;
 `;
 
-const ButtonContainer = styled.div`
-  width: 70%;  
-  padding: 0 15px;
-  display: flex;
-  gap: 20px;
-  margin: 0 auto;
-`;
-
-const SmallButton = styled(Button)`
-  font-size: 14px;
-  margin-top:0;
-`;

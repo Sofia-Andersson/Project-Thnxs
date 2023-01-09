@@ -15,15 +15,15 @@ export const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [modeChange, setModeChange] = useState('login');
-  const [errorMessage, setErrorMessage] = useState('');
-
+  
+  const errorMessage = useSelector((store) => store.user.error);
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onToggleClick = () => {
-    setErrorMessage('');
+    // setErrorMessage('');
     setUsername('');
     setPassword('');
     if (modeChange === 'login') {
@@ -64,7 +64,7 @@ export const LoginPage = () => {
             dispatch(user.actions.setError(null));
           })
         } else {
-        setErrorMessage(data.response);
+        // setErrorMessage(data.response);
           batch(() => {
             dispatch(user.actions.setUserId(null));
             dispatch(user.actions.setUsername(null));
@@ -72,19 +72,21 @@ export const LoginPage = () => {
             dispatch(user.actions.setError(data.response));
             console.log(data.response);
           });
+        // setError('Sorry, invalid login or password.');
         }
       });
   };
 
-// Test log in section
 return (
   <>
 	<MainWrapper>
       <input type="checkbox" id="chk" aria-hidden="true" />
-			<div class="login">
+			<div className="login">
+        
           <form onSubmit={onFormSubmit}>
-					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Login </label>
-					<input 
+					<label htmlFor="chk" aria-hidden="true" onClick={onToggleClick}>Login </label>
+					{errorMessage && <ErrorP>{errorMessage}</ErrorP>}
+          <input 
               type="text" 
               name="txt" 
             placeholder="User name" 
@@ -98,12 +100,13 @@ return (
             required="" value={password}
               onChange={(event) => setPassword(event.target.value)} />
 					<Button>LOGIN</Button>
+          
           </form>
         </div>
 
         <div className="register">
           <form onSubmit={onFormSubmit}>
-					<label for="chk" aria-hidden="true" onClick={onToggleClick}>Register </label>
+					<label htmlFor="chk" aria-hidden="true" onClick={onToggleClick}>Register </label>
           <Input 
               type="text" 
               name="txt" 
@@ -142,6 +145,12 @@ const PasswordRequirements = styled.div`
 
 const Input = styled.input`
   margin: 20px 60px 5px 60px;
+`;
+
+const ErrorP = styled.p`
+  margin: 0 60px;
+  color: var(	--color-orange);
+  
 `;
 
 // Former log in section:

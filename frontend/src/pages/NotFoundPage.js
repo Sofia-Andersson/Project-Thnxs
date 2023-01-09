@@ -4,10 +4,10 @@ import { Button } from '../styledComponents/Button'
 
 export const NotFoundPage = () => {
     return (
-      <>
+      <> 
           <h1>404. Sorry, this page can't be found</h1>
           <Link to="/">
-            <Button>Go back to startpage</Button>
+            <Button>GO BACK TO STARTPAGE</Button>
           </Link>
       </>
     );

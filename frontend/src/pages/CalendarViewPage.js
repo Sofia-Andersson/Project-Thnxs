@@ -3,7 +3,7 @@ import { API_URL } from '../utils/urls';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { LoadingPage } from '../pages/LoadingPage';
-import { Button } from '../styledComponents/Button';
+import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
 import { user } from '../reducers/user';
 import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
@@ -81,28 +81,25 @@ export const CalendarViewPage = () => {
           })}
 
         <Button type="button" onClick={loadMore}>LOAD MORE</Button>
-
         </OuterThnxWrapper>
-        
-        <Button onClick={() => {navigate('/input')}}>
-          Add todays thnx
-        </Button>
 
-        <Button onClick={onLogoutClick}>
+        <ButtonContainer>
+        <SmallButton onClick={() => {navigate('/input')}}>
+          ADD NEW THNX
+        </SmallButton>
+        <SmallButton onClick={onLogoutClick}>
           LOG OUT
-        </Button>
-        
+        </SmallButton>
+        </ButtonContainer>
       </MainTextWrapper>
-
     <Footer/>
     </>
   )
 }
 
 const MainTextWrapper = styled(MainWrapper)`
-    height: 70vh;
     color: var(--color-black);
-    padding: 35px 20px;
+    padding: 35px 20px 0px 20px;
     overflow: scroll;
 `;
 

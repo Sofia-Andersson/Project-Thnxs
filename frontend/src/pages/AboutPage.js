@@ -26,9 +26,9 @@ export const AboutPage = () => {
 8. Write regularly. Whether you write daily or every other day, commit to a regular time to journal, then honor that commitment.</AboutP> 
     </div>    
     <div>
-    <CreatedByP><span>THNX </span>is built by <a href='linda-norbergs-portfolio.netlify.app'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</CreatedByP>
+    <CreatedByP><span>THNX </span>is built by <a href='https://linda-norbergs-portfolio.netlify.app'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</CreatedByP>
     <Link to="/">
-        <Button>BACK TO STARTPAGE</Button>
+        <Button>TO STARTPAGE</Button>
     </Link>
     </div>
     </AboutWrapper>
@@ -42,12 +42,11 @@ font-size: 12px;
 `;
 
 const AboutWrapper = styled(MainWrapper)`
-    padding: 20px 40px;
-    margin: 50px; 0;
-    width: 70vw;
     color: var(--color-white);
-    height: 450px;
     overflow: scroll;
+    max-width: 70vw;
+    overflow-x: hidden;
+    padding: 20px 40px;
 `;
 
 const CreatedByP = styled.p`

@@ -26,3 +26,16 @@ export const Button = styled.button `
     text-decoration:none;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  width: 70%;  
+  padding: 0 15px;
+  display: flex;
+  gap: 20px;
+  margin: 0 auto;
+`;
+
+export const SmallButton = styled(Button)`
+  font-size: 14px;
+  margin-top:0;
+`;

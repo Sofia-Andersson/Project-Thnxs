@@ -24,11 +24,11 @@ body{
 	padding: 0;
 	display: flex;
 	justify-content: center;
-
 	min-height: 100vh;
 
-	@media (min-width: 668px) {
+	@media (min-width: 576px) {
 		align-items: center;
+
 	}
 }
 
