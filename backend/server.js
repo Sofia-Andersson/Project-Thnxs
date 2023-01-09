@@ -185,7 +185,7 @@ app.get('/thnxs', authenticateUser);
 app.get('/thnxs', async (req, res) => {
   const today = new Date();
   const limit = req.query.limit ?? 200;
-
+  console.log("limit:", limit);
   console.log("today: ", today);
   const todayMinusFour = new Date();
   todayMinusFour.setDate(today.getDate() - 4);
