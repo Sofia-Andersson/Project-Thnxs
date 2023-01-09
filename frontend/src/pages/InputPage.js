@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
+import { user } from '../reducers/user';
 // import { user } from '../reducers/user';
 
 import { Button } from '../styledComponents/Button'
@@ -20,6 +21,7 @@ export const InputPage = () => {
   // console.log(textOne)
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onNewThnxChange1 = (event) => {
     setNewThnx1(event.target.value);
@@ -32,6 +34,11 @@ export const InputPage = () => {
   const onNewThnxChange3 = (event) => {
     setNewThnx3(event.target.value);
   }
+
+  const onLogoutClick = () => {
+    dispatch(user.actions.setAccessToken(null));
+    navigate("/");
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -99,7 +106,7 @@ export const InputPage = () => {
             <SmallButton onClick={() => {
                 navigate('/calendar')
                 }}>VIEW OLD THNX</SmallButton>
-              <SmallButton onClick={() => {(navigate('/'))}}>LOG OUT</SmallButton>
+              <SmallButton onClick={onLogoutClick}>LOG OUT</SmallButton>
             </ButtonContainer>
         </InputWrapper>
       

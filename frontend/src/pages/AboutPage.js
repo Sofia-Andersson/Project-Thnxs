@@ -26,7 +26,7 @@ export const AboutPage = () => {
 8. Write regularly. Whether you write daily or every other day, commit to a regular time to journal, then honor that commitment.</AboutP> 
     </div>    
     <div>
-    <CreatedByP><span>THNX </span>is built by <a href='https://cute-starburst-1d7ef1.netlify.app/'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</CreatedByP>
+    <CreatedByP><span>THNX </span>is built by <a href='linda-norbergs-portfolio.netlify.app'>Linda Norberg</a> and <a href='https://sofia-andersson.netlify.app/'>Sofia Andersson</a> as the final project of Technigo Web Development Bootcamp 2022/2023</CreatedByP>
     <Link to="/">
         <Button>BACK TO STARTPAGE</Button>
     </Link>

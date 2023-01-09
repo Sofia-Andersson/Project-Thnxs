@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'; 
 import { API_URL } from '../utils/urls';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoadingPage } from '../pages/LoadingPage';
 import { Button } from '../styledComponents/Button';
 import { user } from '../reducers/user';
@@ -17,6 +17,11 @@ export const CalendarViewPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const onLogoutClick = () => {
+    dispatch(user.actions.setAccessToken(null));
+    navigate("/");
+  };
 
   useEffect(() => {
       if (!accessToken) {
@@ -83,7 +88,7 @@ export const CalendarViewPage = () => {
           Add todays thnx
         </Button>
 
-        <Button onClick={() => {(navigate('/'))}}>
+        <Button onClick={onLogoutClick}>
           LOG OUT
         </Button>
         
