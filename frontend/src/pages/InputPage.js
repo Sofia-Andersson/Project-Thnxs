@@ -7,7 +7,7 @@ import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 import { user } from '../reducers/user';
 import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button'
-
+import Swal from 'sweetalert2';
 // import { user } from '../reducers/user';
 
 
@@ -60,25 +60,32 @@ export const InputPage = () => {
 
     fetch(API_URL('thnxs'), options)
       .then((res) => res.json())
-      // .then((data) => {
-      //   if (data.success) {
-      //     batch(() => {
-      //       dispatch(input.actions.text1(data.response.text1))
-      //       dispatch(user.actions.setError(null));
-      //     })
-      //   } else {
-      //   // setErrorMessage(data.response);
-      //     batch(() => {
-      //       dispatch(input.actions.text1(null));
-      //       dispatch(input.actions.setError(data.response));
-      //     });
-      //   }
-      // })
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Great job!',
+            text: '',
+            background: 'var(--color-white)',
+            buttonsStyling: false,
+            customClass: {confirmButton: 'alertButton'}
+          }); 
+          navigate('/calendar');
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'You already submitted your thanks for today!',
+            background: 'var(--color-white)',
+            buttonsStyling: false,
+            customClass: {confirmButton: 'alertButton'}
+          });
+        }
+      })
       .catch((error) => console.error(error))
       .finally(() => setNewThnx1(''), setNewThnx2(''), setNewThnx3(''));
 
-    alert("Great job!");  
-    navigate('/calendar')
+   
   }
 
   if (!accessToken) {
@@ -138,3 +145,19 @@ const InputWrapper = styled(MainWrapper)`
 	height: 510px;
 `;
 
+
+
+     // .then((data) => {
+      //   if (data.success) {
+      //     batch(() => {
+      //       dispatch(input.actions.text1(data.response.text1))
+      //       dispatch(user.actions.setError(null));
+      //     })
+      //   } else {
+      //   // setErrorMessage(data.response);
+      //     batch(() => {
+      //       dispatch(input.actions.text1(null));
+      //       dispatch(input.actions.setError(data.response));
+      //     });
+      //   }
+      // })

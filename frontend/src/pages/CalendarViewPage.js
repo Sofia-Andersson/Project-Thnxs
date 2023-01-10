@@ -101,6 +101,7 @@ const MainTextWrapper = styled(MainWrapper)`
     color: var(--color-black);
     padding: 35px 20px 0px 20px;
     overflow: scroll;
+    height: 450px;
 `;
 
 const ThnxWrapper = styled.div`
