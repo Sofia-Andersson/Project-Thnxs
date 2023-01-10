@@ -133,6 +133,7 @@ const TextAreaContainer = styled.div`
 
 const Textarea = styled.textarea`
   margin: 10px 0;
+  font-size: 16px;
   resize: none;
   font-family: 'Akshar', sans-serif;
   height: 3rem; 
