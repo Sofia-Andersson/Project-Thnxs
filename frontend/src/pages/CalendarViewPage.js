@@ -100,7 +100,6 @@ export const CalendarViewPage = () => {
 const MainTextWrapper = styled(MainWrapper)`
     color: var(--color-black);
     overflow: scroll;
-    height: 450px;
 `;
 
 const ThnxWrapper = styled.div`

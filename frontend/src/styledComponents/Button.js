@@ -29,13 +29,12 @@ export const Button = styled.button `
 
 export const ButtonContainer = styled.div`
   width: 70%;  
-  padding: 0 15px;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   margin: 0 auto;
 `;
 
 export const SmallButton = styled(Button)`
-  font-size: 14px;
+  font-size: 16px;
   margin-top:0;
 `;

@@ -99,7 +99,7 @@ export const InputPage = () => {
 
     return (
       <>
-        <InputWrapper>
+        <MainWrapper>
           <form onSubmit={onFormSubmit}>
             <h1>HI {username.toUpperCase()}, WHAT ARE YOU GRATEFUL FOR TODAY?</h1>
             <TextAreaContainer>
@@ -112,10 +112,10 @@ export const InputPage = () => {
             <ButtonContainer>
             <SmallButton onClick={() => {
                 navigate('/calendar')
-                }}>VIEW OLD THNX</SmallButton>
+                }}>PREVIOUS THNX</SmallButton>
               <SmallButton onClick={onLogoutClick}>LOG OUT</SmallButton>
             </ButtonContainer>
-        </InputWrapper>
+        </MainWrapper>
       
         <Footer/>
       </>
@@ -138,10 +138,6 @@ const Textarea = styled.textarea`
   border-radius: 5px;
   padding: 5px;
   outline-color: var(--color-lightBrown);
-`;
-
-const InputWrapper = styled(MainWrapper)`
-	height: 510px;
 `;
 
 
