@@ -22,7 +22,7 @@ export const Button = styled.button `
   &:hover { background-color: var(--color-black) }
 
   a {
-    color: #0d0807; 
+    color: #0d0807;
     text-decoration:none;
   }
 `;
@@ -35,6 +35,6 @@ export const ButtonContainer = styled.div`
 `;
 
 export const SmallButton = styled(Button)`
-  font-size: 16px;
+  font-size: 13px;
   margin-top:0;
 `;

@@ -100,7 +100,7 @@ input {
 }
 
 #chk:checked ~ .register {
-	transform: translateY(-500px);
+	transform: translateY(-510px);
 }
 #chk:checked ~ .register label {
 	transform: scale(1);

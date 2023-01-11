@@ -68,7 +68,7 @@ export const InputPage = () => {
             text: '',
             button: 'OK',
           }); 
-          navigate('/calendar');
+          navigate('/previous-thnx');
         } else {
           swal({
             icon: 'warning',
@@ -111,7 +111,7 @@ export const InputPage = () => {
           </form>
             <ButtonContainer>
             <SmallButton onClick={() => {
-                navigate('/calendar')
+                navigate('/previous-thnx')
                 }}>PREVIOUS THNX</SmallButton>
               <SmallButton onClick={onLogoutClick}>LOG OUT</SmallButton>
             </ButtonContainer>

@@ -7,7 +7,7 @@ import { user } from './reducers/user';
 
 import { LoginPage } from './pages/LoginPage';
 import { InputPage } from './pages/InputPage';
-import { CalendarViewPage } from './pages/CalendarViewPage'
+import { PreviousThnxPage } from './pages/PreviousThnxPage'
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AboutPage } from './pages/AboutPage';
 
@@ -24,7 +24,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/input" element={<InputPage />} />
-          <Route path="/calendar" element={<CalendarViewPage />} />
+          <Route path="/previous-thnx" element={<PreviousThnxPage />} />
           <Route path="/*" element={<NotFoundPage />} /> 
           <Route path="/about" element={<AboutPage />} />
         </Routes>

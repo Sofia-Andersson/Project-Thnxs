@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { API_URL } from '../utils/urls';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { LoadingPage } from '../pages/LoadingPage';
+import { LoadingPage } from './LoadingPage';
 import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
 import { user } from '../reducers/user';
 import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 
-export const CalendarViewPage = () => {
+export const PreviousThnxPage = () => {
   const [thnxList, setThnxList] = useState([]);
   const [limit, setLimit] = useState(2)
   const isLoading = useSelector((store) => store.user.isLoading);
@@ -85,7 +85,7 @@ export const CalendarViewPage = () => {
 
         <ButtonContainer>
         <SmallButton onClick={() => {navigate('/input')}}>
-          ADD NEW THNX
+          ADD THNX
         </SmallButton>
         <SmallButton onClick={onLogoutClick}>
           LOG OUT
