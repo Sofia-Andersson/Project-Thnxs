@@ -6,8 +6,8 @@ import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 import { user } from '../reducers/user';
-import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button'
-import Swal from 'sweetalert2';
+import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
+import swal from 'sweetalert';
 // import { user } from '../reducers/user';
 
 
@@ -62,21 +62,24 @@ export const InputPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          Swal.fire({
+          swal({
             icon: 'success',
             title: 'Great job!',
             text: '',
-            background: 'var(--color-white)',
-
+            button: 'OK', 
+            button: {
+            className: 'alertButton'
+          }
           }); 
           navigate('/calendar');
         } else {
-          Swal.fire({
+          swal({
             icon: 'warning',
             title: 'Oops...',
             text: 'You already submitted your thanks for today!',
-            background: 'var(--color-white)',
-
+            button: {
+              text: 'OK'
+            }
           });
         }
       })
