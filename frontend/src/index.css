@@ -17,14 +17,18 @@
 
 body {
 	font-family: 'Akshar', sans-serif;
-    background-image: url("./assets/background.jpg");
-    background-size: cover;
-    overflow: hidden;
+	background-image: url("./assets/background.jpg");
+	background-size: cover;
+	overflow: hidden;
 	margin: 0;
 	padding: 0;
 	display: flex;
 	justify-content: center;
 	min-height: 100vh;
+
+	/* @media (min-width: 576px) {
+		align-items: center; 
+	} */
 }
 
 a {

@@ -67,8 +67,7 @@ export const InputPage = () => {
             title: 'Great job!',
             text: '',
             background: 'var(--color-white)',
-            buttonsStyling: false,
-            customClass: {confirmButton: 'alertButton'}
+
           }); 
           navigate('/calendar');
         } else {
@@ -77,8 +76,7 @@ export const InputPage = () => {
             title: 'Oops...',
             text: 'You already submitted your thanks for today!',
             background: 'var(--color-white)',
-            buttonsStyling: false,
-            customClass: {confirmButton: 'alertButton'}
+
           });
         }
       })
@@ -147,6 +145,11 @@ const InputWrapper = styled(MainWrapper)`
 `;
 
 
+// buttonsStyling: false,
+// customClass: {confirmButton: 'alertButton'}
+
+// buttonsStyling: false,
+// customClass: {confirmButton: 'alertButton'}
 
      // .then((data) => {
       //   if (data.success) {
