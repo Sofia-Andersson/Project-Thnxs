@@ -10,6 +10,10 @@ export const MainWrapper = styled.div`
     @media (max-width: 576px) {
         margin-top: 10%;
     }
+
+    @media (min-width: 577px) and (max-width: 1440px) {
+        height: 460px;
+    }
 `;
 
 

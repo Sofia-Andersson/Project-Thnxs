@@ -52,6 +52,10 @@ const AboutWrapper = styled(MainWrapper)`
     padding: 20px 40px;
     height: 450px;
     word-wrap: break-word;
+
+    @media (min-width: 577px) and (max-width: 1440px) {
+        height: 420px;
+    }
 `;
 
 const CreatedByP = styled.p`

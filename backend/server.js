@@ -196,10 +196,10 @@ app.get('/thnxs', async (req, res) => {
   try {
     const thnxFromSpecificDate = await Thnx.find({
       ownerId: singleUser._id,
-      createdAt: {
-        $gte: (todayMinusFour),
-        $lte: (today)
-      }
+      // createdAt: {
+      //   $gte: (todayMinusFour),
+      //   $lte: (today)
+      // }
     }).sort({createdAt: -1}).limit(limit);
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
