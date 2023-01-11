@@ -6,18 +6,9 @@ export const MainWrapper = styled.div`
     overflow hidden;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
-    margin-top: 40px;
 
-    @media (min-width: 600px) {
-        margin-top: 200px;
-    }
-
-    @media (min-width: 800px) {
+    @media (max-width: 576px) {
         margin-top: 10%;
-    }
-
-    @media (min-width: 1200px) {
-        margin-top: 35%;
     }
 `;
 

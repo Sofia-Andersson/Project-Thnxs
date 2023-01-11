@@ -66,10 +66,7 @@ export const InputPage = () => {
             icon: 'success',
             title: 'Great job!',
             text: '',
-            button: 'OK', 
-            button: {
-            className: 'alertButton'
-          }
+            button: 'OK',
           }); 
           navigate('/calendar');
         } else {
