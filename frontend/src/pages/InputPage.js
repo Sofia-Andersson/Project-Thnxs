@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { API_URL } from '../utils/urls';
 import { Link, useNavigate } from "react-router-dom";
 import styled from 'styled-components/macro';
-import { MainWrapper } from '../styledComponents/MainWrapper';
-import { Footer } from '../components/Footer';
-import { user } from '../reducers/user';
-import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
 import swal from 'sweetalert';
-// import { user } from '../reducers/user';
 
+import { API_URL } from '../utils/urls';
+import { user } from '../reducers/user';
+import { Footer } from '../components/Footer';
+import { MainWrapper } from '../styledComponents/MainWrapper';
+import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
 
-
-// importera komponenterna
 export const InputPage = () => { 
   const [newThnx1, setNewThnx1] = useState('');
   const [newThnx2, setNewThnx2] = useState('');
   const [newThnx3, setNewThnx3] = useState('');
+
   const accessToken = useSelector((store) => store.user.accessToken);
   const username = useSelector((store) => store.user.username);
-  // const textOne = useSelector((store) => store.input.textOne);
-  // console.log(textOne)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,11 +33,13 @@ export const InputPage = () => {
     setNewThnx3(event.target.value);
   }
 
+  // Logout btn, deletes accessToken and send the user to LoginPage
   const onLogoutClick = () => {
     dispatch(user.actions.setAccessToken(null));
     navigate("/");
   };
 
+  // Prevents the page from reloading when submitting form
   const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -58,10 +56,12 @@ export const InputPage = () => {
       })
     };
 
+    // Posts new thnx if the user have not committed one thnx today 
     fetch(API_URL('thnxs'), options)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          // Sweet alert is fired 
           swal({
             icon: 'success',
             title: 'Great job!',
@@ -74,16 +74,12 @@ export const InputPage = () => {
             icon: 'warning',
             title: 'Oops...',
             text: 'You already submitted your thanks for today!',
-            button: {
-              text: 'OK'
-            }
+            button: 'OK'
           });
         }
       })
       .catch((error) => console.error(error))
       .finally(() => setNewThnx1(''), setNewThnx2(''), setNewThnx3(''));
-
-   
   }
 
   if (!accessToken) {
@@ -110,18 +106,19 @@ export const InputPage = () => {
             <Button type="submit">SUBMIT</Button>
           </form>
             <ButtonContainer>
-            <SmallButton onClick={() => {
+              <SmallButton onClick={() => {
                 navigate('/previous-thnx')
                 }}>PREVIOUS THNX</SmallButton>
               <SmallButton onClick={onLogoutClick}>LOG OUT</SmallButton>
             </ButtonContainer>
         </MainWrapper>
-      
+        
         <Footer/>
       </>
     )
 };
 
+// STYLING 
 const TextAreaContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -139,25 +136,3 @@ const Textarea = styled.textarea`
   padding: 5px;
   outline-color: var(--color-lightBrown);
 `;
-
-
-// buttonsStyling: false,
-// customClass: {confirmButton: 'alertButton'}
-
-// buttonsStyling: false,
-// customClass: {confirmButton: 'alertButton'}
-
-     // .then((data) => {
-      //   if (data.success) {
-      //     batch(() => {
-      //       dispatch(input.actions.text1(data.response.text1))
-      //       dispatch(user.actions.setError(null));
-      //     })
-      //   } else {
-      //   // setErrorMessage(data.response);
-      //     batch(() => {
-      //       dispatch(input.actions.text1(null));
-      //       dispatch(input.actions.setError(data.response));
-      //     });
-      //   }
-      // })

@@ -1,28 +1,34 @@
 import React, { useState, useEffect, useCallback } from 'react'; 
-import { API_URL } from '../utils/urls';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import styled from 'styled-components/macro';
+
+import { API_URL } from '../utils/urls';
+import { user } from '../reducers/user';
 import { LoadingPage } from './LoadingPage';
 import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
-import { user } from '../reducers/user';
-import styled from 'styled-components/macro';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 
 export const PreviousThnxPage = () => {
   const [thnxList, setThnxList] = useState([]);
-  const [limit, setLimit] = useState(2)
+
+  // First page shows the two latest thnx 
+  const [limit, setLimit] = useState(2);
+  
   const isLoading = useSelector((store) => store.user.isLoading);
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
+  // Removes accestoken and navigates to login page
   const onLogoutClick = () => {
     dispatch(user.actions.setAccessToken(null));
     navigate("/");
   };
 
+  // If the user is not logged in the user is send to login page 
   useEffect(() => {
       if (!accessToken) {
         navigate('/');
@@ -57,15 +63,16 @@ export const PreviousThnxPage = () => {
       fetchThnx();
   }, [limit]);
 
-  const loadMore = () => {
-    setLimit(limit+5)
+  // increase the limit of the fetch each time btn load more is clicked
+  const onLoadMoreClick = () => {
+    setLimit(limit+5);
   };
 
   return (
     <>
       <MainTextWrapper>
         <OuterThnxWrapper> 
-          {isLoading && <LoadingPage />}
+          {isLoading && <LoadingPage />};
 
           {thnxList.map((singleThnx) => {
             return (
@@ -78,25 +85,26 @@ export const PreviousThnxPage = () => {
                 </div>
               </ThnxWrapper>      
             )
-          })}
+          })};
 
-        <Button type="button" onClick={loadMore}>LOAD MORE</Button>
+          <Button type="button" onClick={onLoadMoreClick}>LOAD MORE</Button>
         </OuterThnxWrapper>
 
         <ButtonContainer>
-        <SmallButton onClick={() => {navigate('/input')}}>
-          ADD THNX
-        </SmallButton>
-        <SmallButton onClick={onLogoutClick}>
-          LOG OUT
-        </SmallButton>
+          <SmallButton onClick={() => {navigate('/input')}}>
+            ADD THNX
+          </SmallButton>
+          <SmallButton onClick={onLogoutClick}>
+            LOG OUT
+          </SmallButton>
         </ButtonContainer>
       </MainTextWrapper>
     <Footer/>
     </>
-  )
-}
+  );
+};
 
+// STYLING 
 const MainTextWrapper = styled(MainWrapper)`
     color: var(--color-black);
     overflow: scroll;

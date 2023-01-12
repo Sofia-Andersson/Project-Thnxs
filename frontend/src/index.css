@@ -37,6 +37,10 @@ a {
 	text-decoration: none; 
 }
 
+h3 {
+	margin: 10px 0 5px 0;
+}
+
 
 /* ----- Login/Register animation ----- */
 
@@ -64,7 +68,6 @@ h1 {
 		font-size: 1.3em;
 		margin: 30px 30px 10px;
 	}
-	
 }
 
 label {
@@ -127,7 +130,7 @@ input {
 }
 
 
-/* ----- Alert button styling ----- */
+/* ----- Sweet alert button styling ----- */
 
 .swal-button--confirm {
 	background: var(--color-ligthBlack);
