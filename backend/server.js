@@ -6,9 +6,6 @@ import mongoose from 'mongoose';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 
-// Necessary to use mongoose:
-// npm install
-// npm install mongoose
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/project-gratitude-journal-final';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
@@ -46,17 +43,12 @@ const ThnxSchema = new mongoose.Schema({
 
 const Thnx = mongoose.model('Thnx', ThnxSchema);
 
-// Create UserSchema to define input needed from the user and how it should be handled.
-// Adjust according to Daniels instructions!
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
     unique: true
   },
-  // thnxIds: {
-  //   type: Array,
-  //  },
   password: {
     type: String,
     required: true
@@ -64,9 +56,6 @@ const UserSchema = new mongoose.Schema({
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
-  },
-  phoneNumber: {
-    type: Number
   }
 });
 
@@ -76,13 +65,13 @@ const User = mongoose.model('User', UserSchema);
 app.use(cors());
 app.use(express.json());
 
-// Start defining your routes here
+// ROUTES 
 app.get('/', (req, res) => {
   res.send('Connection is working');
 });
 
 // Route for the user to register, bcrypt the password, and gives the user
-// a accessToken
+// an accessToken
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
   try {
