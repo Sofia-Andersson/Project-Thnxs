@@ -154,69 +154,16 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-// returns all thnxs for a specific logged in user using accessToken to get user._id
-// and then search for ownerId
-app.get('/thnxs/:limitValue', authenticateUser);
-app.get('/thnxs/:limitValue', async (req, res) => {
-  const accessToken = req.header('Authorization');
-  const { limitValue } = req.params;
-  try {
-    const user = await User.findOne({ accessToken });
-    const thnxs = await Thnx.find({ ownerId: user._id }).sort({createdAt: "desc"}).limit(limitValue);
-    res.status(200).json({ success: true, response: thnxs })
-  } catch (error) {
-    res.status(400).json({ success: false, response: error });
-  }
-});
-
-// return thnxs from today and 4 previous days
+// return all thnxs from one user, but with limit 
 app.get('/thnxs', authenticateUser);
 app.get('/thnxs', async (req, res) => {
-  const today = new Date();
   const limit = req.query.limit ?? 200;
-  console.log("limit:", limit);
-  console.log("today: ", today);
-  const todayMinusFour = new Date();
-  todayMinusFour.setDate(today.getDate() - 4);
-  console.log("t minus 4:", todayMinusFour);
-
   const accessToken = req.header('Authorization');
   const singleUser = await User.findOne({ accessToken });
   try {
     const thnxFromSpecificDate = await Thnx.find({
       ownerId: singleUser._id,
-      // createdAt: {
-      //   $gte: (todayMinusFour),
-      //   $lte: (today)
-      // }
     }).sort({createdAt: -1}).limit(limit);
-    res.status(200).json({ success: true, thnxFromSpecificDate })
-  } catch (error) {
-    res.status(400).json({ success: false, response: error });
-  }
-});
-
-// return thnx from specific user and date
-app.get('/thnxs/:date', authenticateUser);
-app.get('/thnxs/:date', async (req, res) => {
-  // getting the date from url
-  const { date } = req.params;
-  console.log('date:', date);
-  const queryDate = new Date(date);
-  console.log('queryDate:', queryDate);
-  const followingDate = new Date(queryDate.setDate(queryDate.getDate() + 1))
-  console.log('followingDate:', followingDate);
-  // Validating the user by accesToken
-  const accessToken = req.header('Authorization');
-  const singleUser = await User.findOne({ accessToken });
-  try {
-    const thnxFromSpecificDate = await Thnx.find({
-      ownerId: singleUser._id,
-      createdAt: {
-        $gte: (date),
-        $lt: (followingDate)
-      }
-    });
     res.status(200).json({ success: true, thnxFromSpecificDate })
   } catch (error) {
     res.status(400).json({ success: false, response: error });
@@ -226,13 +173,10 @@ app.get('/thnxs/:date', async (req, res) => {
 const oneThnxPerDayLimit = async (req, res, next) => {
   // todays date last midnight
   const today = new Date().setUTCHours(0,0,0,0);
-  console.log('today2:', today);
   const queryDate = new Date(today).getTime();
-  console.log('queryDate2:', queryDate);
 
   // coming midnight in millisecond
   const followingDate = new Date(queryDate).setDate(new Date(queryDate).getDate() + 1);
-  console.log('followingDate2:', followingDate);
 
   const accessToken = req.header('Authorization');
 
@@ -247,7 +191,6 @@ const oneThnxPerDayLimit = async (req, res, next) => {
       $gte: queryDate,
       $lt: followingDate
     }}))
-    console.log("testDate:", testDate)
 
     if (testDate) {
       res.status(400).json({ success: false, response: 'You have already submitted the thnxs for today' });
@@ -261,6 +204,7 @@ const oneThnxPerDayLimit = async (req, res, next) => {
 
 // for the inlogged user to post a thnx with 3 texts
 // updates ownerId with the user._id
+// only allowed one per day 
 app.post('/thnxs', authenticateUser);
 app.post('/thnxs', oneThnxPerDayLimit);
 app.post('/thnxs', async (req, res) => {
