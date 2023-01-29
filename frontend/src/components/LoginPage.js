@@ -73,7 +73,6 @@ export const LoginPage = () => {
             dispatch(user.actions.setUsername(null));
             dispatch(user.actions.setAccessToken(null));
             dispatch(user.actions.setError(data.response));
-            console.log(data.response);
           })
         }
         // Ends the loading 

@@ -6,7 +6,9 @@ import styled from 'styled-components/macro';
 import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import { LoadingPage } from './LoadingPage';
-import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
+import { Button } from '../styledComponents/Button';
+import { SmallButton } from '../styledComponents/SmallButton';
+import { ButtonContainer } from '../styledComponents/ButtonContainer';
 import { MainWrapper } from '../styledComponents/MainWrapper';
 import { Footer } from '../components/Footer';
 
@@ -48,12 +50,8 @@ export const PreviousThnxPage = () => {
       fetch(API_URL('thnxs?limit=' + limit), options)
         .then(async (res) => {
           const json = await res.json();
-          console.log(json);
-          // {success: ..., thnxFrom...}
-          console.log(json.success);
           setThnxList(json.thnxFromSpecificDate.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
         })
-        // .then((data) => setThnxList(data.response))  
         .catch((error) => console.error(error))
         .finally(() => dispatch(user.actions.setLoading(false)));
   }, [limit]);
@@ -112,7 +110,7 @@ const MainTextWrapper = styled(MainWrapper)`
 
 const ThnxWrapper = styled.div`
     background-color: var(--color-whiteTransp);
-    heigth: 40%;
+    height: 40%;
     width: 60%;
     margin: 10px 10px;
     border-radius: 5px;

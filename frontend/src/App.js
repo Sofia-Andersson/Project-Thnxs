@@ -5,11 +5,11 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 import { user } from './reducers/user';
 
-import { LoginPage } from './pages/LoginPage';
-import { InputPage } from './pages/InputPage';
-import { PreviousThnxPage } from './pages/PreviousThnxPage'
-import { NotFoundPage } from './pages/NotFoundPage';
-import { AboutPage } from './pages/AboutPage';
+import { LoginPage } from './components/LoginPage';
+import { InputPage } from './components/InputPage';
+import { PreviousThnxPage } from './components/PreviousThnxPage'
+import { NotFoundPage } from './components/NotFoundPage';
+import { AboutPage } from './components/AboutPage';
 
 const reducer = combineReducers({
   user: user.reducer

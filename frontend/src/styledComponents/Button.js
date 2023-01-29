@@ -26,15 +26,3 @@ export const Button = styled.button `
     text-decoration:none;
   }
 `;
-
-export const ButtonContainer = styled.div`
-  width: 70%;  
-  display: flex;
-  gap: 10px;
-  margin: 0 auto;
-`;
-
-export const SmallButton = styled(Button)`
-  font-size: 13px;
-  margin-top:0;
-`;

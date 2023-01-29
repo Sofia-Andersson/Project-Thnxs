@@ -8,7 +8,9 @@ import { API_URL } from '../utils/urls';
 import { user } from '../reducers/user';
 import { Footer } from '../components/Footer';
 import { MainWrapper } from '../styledComponents/MainWrapper';
-import { Button, SmallButton, ButtonContainer } from '../styledComponents/Button';
+import { Button } from '../styledComponents/Button';
+import { SmallButton } from '../styledComponents/SmallButton';
+import { ButtonContainer } from '../styledComponents/ButtonContainer';
 
 export const InputPage = () => { 
   const [newThnx1, setNewThnx1] = useState('');

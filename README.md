@@ -12,7 +12,7 @@ We started off by creating a pitch of our project in figma including:
     - Week 0-1: Sketch frontend and backend structure. Created backend with database modeling and endpoints
     - Week 2: User interface sketch. Connected backend to the frontend. Testing the functionality
     - Week 3: Styling, responsiveness, testing. Demo preparation. (CELEBRATION!)
-- Minimum viable product & strech goals: blue 🔵, red 🔴 and black ⚫️ colour-code features
+- Minimum viable product & stretch goals: blue 🔵, red 🔴 and black ⚫️ colour-code features
 - Design idea
 
 As soon as we got the pitch approved we created a board in figma with tickets to solve and ticked them off one by one. When we got stuck and had emptied all of our own resources we frequently used the help chanels provided, live Q&A with code coaches and Stack Overflow Team. 
